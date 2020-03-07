@@ -1,8 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Mathematical Playgrounds`,
+    description: `A growing collection of interactive games and visuals for budding minds`,
+    author: `Tyler Auer`,
+    siteUrl: `https://play.mathfireworks.com`,
   },
   plugins: [
     `gatsby-plugin-emotion`,
