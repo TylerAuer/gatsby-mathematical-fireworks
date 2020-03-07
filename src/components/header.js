@@ -1,42 +1,33 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
+import { Link } from "gatsby"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
+const Header = () => (
+  <header>
+    <div className="row">
+      <div id="header-title-div" className="col-12 text-center">
+        <h1 id="header-title" className="display-4">
+          Mathematical Playgrounds
+        </h1>
+      </div>
+    </div>
+
+    <div id="nav-links" className="mb-3">
+      <nav className="nav d-flex justify-content-center">
+        <a href="/" className="px-2">
+          Home
+        </a>
+        <a href="/About" className="px-2">
+          About
+        </a>
+        <a
+          href="https://github.com/TylerAuer/gatsby-tutorials"
+          className="px-2"
         >
-          {siteTitle}
-        </Link>
-      </h1>
+          GitHub
+        </a>
+      </nav>
     </div>
   </header>
 )
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
 
 export default Header
