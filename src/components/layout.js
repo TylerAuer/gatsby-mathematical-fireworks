@@ -5,8 +5,8 @@
 
 import React from "react"
 import HeadMeta from "./headMeta"
-import Header from "./header"
-import "./layout.css"
+import Header from "./title-and-nav/header"
+import "./global.css"
 
 export default ({ children }) => (
   <>
