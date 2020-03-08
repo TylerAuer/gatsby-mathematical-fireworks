@@ -42,7 +42,7 @@ class Title extends React.Component {
       }
 
       wrappedLettersText.push(
-        <span className="title-letter" style={style}>
+        <span key={i} className="title-letter" style={style}>
           {title.charAt(i)}
         </span>
       )
