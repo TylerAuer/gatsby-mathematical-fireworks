@@ -8,6 +8,7 @@ const colorCycle = [
   "rgb(255, 116, 81)", // orange
 ]
 
+// TODO: Clearly comment this code
 class Title extends React.Component {
   constructor(props) {
     super(props)
