@@ -11,7 +11,7 @@ const Header = () => (
     <div id="nav-links" className="mb-3">
       <nav className="nav d-flex justify-content-center">
         <NavLink url="/" text="Home" />
-        <NavLink url="/about.html" text="About" />
+        <NavLink url="/about" text="About" />
         <NavLink
           url="https://github.com/TylerAuer/gatsby-mathematical-fireworks"
           text="GitHub"
