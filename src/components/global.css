@@ -1,0 +1,38 @@
+/* Import Google Fonts (Bungee and Opens Sans */
+@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap");
+/* Imports Bootstrap 4.4.1 */
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css");
+
+/* 
+$theme-yellow: rgb(255, 230, 0);
+$theme-green: rgb(92, 221, 41);
+$theme-pink: rgba(255, 0, 141, 1);
+$theme-blue: rgba(20, 186, 204, 1);
+$theme-red: rgb(255, 116, 81);
+*/
+
+html {
+  font-family: "Open Sans", sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Bungee", cursive;
+  color: rgba(20, 186, 204, 1);
+}
+
+h1 {
+  color: rgba(255, 0, 141, 1);
+}
