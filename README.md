@@ -33,7 +33,7 @@ I recently (2/20/20) finished combining a few projects and migrating the whole s
     - Encipher vs Decipher (encode vs decode)
     - plaintext vs ciphertext
   - Private ciphers
-    - Basic disguising techniques - All caps, clusters of 4, no punctuation
+    - Basic disguising techniques - All caps, clusters of 4 or five, no punctuation
     - Caeser and offset ciphers
   - Public ciphers
     - Hiding that you are even speaking in code
