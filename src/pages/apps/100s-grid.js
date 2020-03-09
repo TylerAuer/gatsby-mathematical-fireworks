@@ -28,7 +28,7 @@ function UserInputs(props) {
       <div className="form-row">
         <div className="col text-center">
           <label for="start">
-            <h6>Start</h6>
+            <h6 style={{ marginBottom: "0px" }}>Start</h6>
           </label>
           <input
             name="start"
@@ -37,45 +37,49 @@ function UserInputs(props) {
             placeholder="1"
             min="0"
             max="300"
+            step="1"
           />
         </div>
         <div className="col text-center">
           <label for="end">
-            <h6>End</h6>
+            <h6 style={{ marginBottom: "0px" }}>End</h6>
           </label>
           <input
             name="end"
             type="number"
-            className="form-control"
+            className="form-control text-center"
             placeholder="100"
             min="1"
             max="10000"
+            step="1"
           />
         </div>
         <div className="col text-center">
           <label for="skip-size">
-            <h6>Skip</h6>
+            <h6 style={{ marginBottom: "0px" }}>Skip</h6>
           </label>
           <input
             name="skip-size"
             type="number"
-            className="form-control"
+            className="form-control text-center"
             placeholder="1"
-            min=".5"
-            max="250"
+            min="1"
+            max="1250"
+            step="1"
           />
         </div>
         <div className="col text-center">
           <label for="columns">
-            <h6>Columns</h6>
+            <h6 style={{ marginBottom: "0px" }}>Columns</h6>
           </label>
           <input
             name="columns"
             type="number"
-            className="form-control"
+            className="form-control text-center"
             placeholder="10"
             min="1"
             max="150"
+            step="1"
           />
         </div>
       </div>
