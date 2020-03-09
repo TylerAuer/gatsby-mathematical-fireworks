@@ -25,18 +25,58 @@ function ButtonBank(props) {
 function UserInputs(props) {
   return (
     <form>
-      <div class="form-row">
-        <div class="col">
-          <input type="number" class="form-control" placeholder="Start" />
+      <div className="form-row">
+        <div className="col text-center">
+          <label for="start">
+            <h6>Start</h6>
+          </label>
+          <input
+            name="start"
+            type="number"
+            className="form-control text-center"
+            placeholder="1"
+            min="0"
+            max="300"
+          />
         </div>
-        <div class="col">
-          <input type="number" class="form-control" placeholder="End" />
+        <div className="col text-center">
+          <label for="end">
+            <h6>End</h6>
+          </label>
+          <input
+            name="end"
+            type="number"
+            className="form-control"
+            placeholder="100"
+            min="1"
+            max="10000"
+          />
         </div>
-        <div class="col">
-          <input type="number" class="form-control" placeholder="Skip Size" />
+        <div className="col text-center">
+          <label for="skip-size">
+            <h6>Skip</h6>
+          </label>
+          <input
+            name="skip-size"
+            type="number"
+            className="form-control"
+            placeholder="1"
+            min=".5"
+            max="250"
+          />
         </div>
-        <div class="col">
-          <input type="number" class="form-control" placeholder="Columns" />
+        <div className="col text-center">
+          <label for="columns">
+            <h6>Columns</h6>
+          </label>
+          <input
+            name="columns"
+            type="number"
+            className="form-control"
+            placeholder="10"
+            min="1"
+            max="150"
+          />
         </div>
       </div>
     </form>
