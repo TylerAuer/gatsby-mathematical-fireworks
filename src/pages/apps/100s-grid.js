@@ -22,66 +22,35 @@ function ButtonBank(props) {
   )
 }
 
+function InputField(props) {
+  const title = props.name[0].toUpperCase() + props.name.slice(1)
+  return (
+    <div className="col text-center">
+      <label for="start">
+        <h6 style={{ marginBottom: "0px" }}>{title}</h6>
+      </label>
+      <input
+        id={props.name}
+        name={props.name}
+        type="number"
+        className="form-control text-center"
+        placeholder={props.placeholder}
+        min={props.min}
+        max={props.max}
+        step="1"
+      />
+    </div>
+  )
+}
+
 function UserInputs(props) {
   return (
     <form>
       <div className="form-row">
-        <div className="col text-center">
-          <label for="start">
-            <h6 style={{ marginBottom: "0px" }}>Start</h6>
-          </label>
-          <input
-            name="start"
-            type="number"
-            className="form-control text-center"
-            placeholder="1"
-            min="0"
-            max="300"
-            step="1"
-          />
-        </div>
-        <div className="col text-center">
-          <label for="end">
-            <h6 style={{ marginBottom: "0px" }}>End</h6>
-          </label>
-          <input
-            name="end"
-            type="number"
-            className="form-control text-center"
-            placeholder="100"
-            min="1"
-            max="10000"
-            step="1"
-          />
-        </div>
-        <div className="col text-center">
-          <label for="skip-size">
-            <h6 style={{ marginBottom: "0px" }}>Skip</h6>
-          </label>
-          <input
-            name="skip-size"
-            type="number"
-            className="form-control text-center"
-            placeholder="1"
-            min="1"
-            max="1250"
-            step="1"
-          />
-        </div>
-        <div className="col text-center">
-          <label for="columns">
-            <h6 style={{ marginBottom: "0px" }}>Columns</h6>
-          </label>
-          <input
-            name="columns"
-            type="number"
-            className="form-control text-center"
-            placeholder="10"
-            min="1"
-            max="150"
-            step="1"
-          />
-        </div>
+        <InputField name="start" placeholder="1" min="0" max="10000" />
+        <InputField name="end" placeholder="100" min="1" max="10000" />
+        <InputField name="skip-size" placeholder="1" min="1" max="1250" />
+        <InputField name="columns" placeholder="1" min="1" max="150" />
       </div>
     </form>
   )
