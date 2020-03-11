@@ -2,8 +2,6 @@ import React from "react"
 import NavLink from "./navlink"
 import Title from "./title"
 
-//TODO: Add color changing support using React. May help to first extract into Title component
-
 const Header = () => (
   <header>
     <Title text="Mathematical Playgrounds" />
