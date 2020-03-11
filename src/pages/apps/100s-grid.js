@@ -122,8 +122,6 @@ class GridApp extends React.Component {
   }
 
   resetOnClick(e) {
-    console.log("It fired")
-
     this.setState({
       startNum: 1,
       endNum: 100,
@@ -133,8 +131,12 @@ class GridApp extends React.Component {
   }
 
   handleChange(e) {
+    // Avoids crash when user deletes current value in input
     if (e.target.value === "") {
-      // Avoids crash when user deletes current value in input
+      this.setState({ [e.target.name]: 1 })
+
+      // Avoids crash when skipCount is set to 0
+    } else if (e.target.name === "skipSize" && parseInt(e.target.value) <= 0) {
       this.setState({ [e.target.name]: 1 })
     } else {
       this.setState({ [e.target.name]: parseInt(e.target.value) })
