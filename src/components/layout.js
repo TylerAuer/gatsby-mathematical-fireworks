@@ -8,6 +8,8 @@ import HeadMeta from "./headMeta"
 import Header from "./title-and-nav/header"
 import "./global.css"
 
+// TODO: Add bootstrap JQuery scripts at end of body (I think that's just at the bottom of this render)
+// TODO: Add fixed footer to the site
 export default ({ children }) => (
   <>
     <HeadMeta />

@@ -9,6 +9,7 @@ const colorCycle = [
 ]
 
 // TODO: Clearly comment this code
+// TODO: Tweak the color effect changes to be smoother
 class Title extends React.Component {
   constructor(props) {
     super(props)

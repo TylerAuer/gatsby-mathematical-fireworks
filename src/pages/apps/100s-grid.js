@@ -2,35 +2,13 @@ import React from "react"
 import Layout from "../../components/layout"
 import ControlBtn from "../../components/control-btn"
 
-/**
- *
- * Need to make info flow downhill
- * Grid App is the highest level
- * App holds a list of values to pass to the table maker component
- * App holds a list of cells shaded certain colors. Pass to table maker then to cell
- * App passes onChange function to input grids so that when change occurs updates state of App
- * App then pass those values back to the input AND to the grid to build
- * Good Ex: https://reactjs.org/docs/lifting-state-up.html
- *
- * This is also likely what I will need to do to change the colors on click for the grid
- */
-
-function ButtonBank(props) {
-  // Generate buttons for skip counting
-  // TODO: Need to figure out what buttons would be wanted when the grid is "weird"
-  return (
-    // Skip count buttons here
-    <ControlBtn
-      className="btn btn-danger"
-      //style={skipCountBtnStyle}
-      text="Reset"
-      // onClick="() => jfdlaksd"
-    />
-  )
-}
+// TODO: Add skip count buttons 1 through 10 as round
+// TODO: Add skip count by... user input option
+// TODO: Redo margins so the grid customization inputs have the larger margin on the bottom not top
+// TODO: Use element to organize the CSS and include :hover options
+// TODO: Work my way back through the code to see if I can optimize it before moving on
 
 function InputField(props) {
-  const title = props.name[0].toUpperCase() + props.name.slice(1)
   const style = {
     border: "2px solid rgb(255, 0, 141)",
     borderRadius: "40px",

@@ -21,6 +21,7 @@ const HeadMeta = () => (
       `}
     </script>
 
+    {/* TODO: Add favicons to the file structure */}
     <link
       rel="apple-touch-icon"
       sizes="60x60"
