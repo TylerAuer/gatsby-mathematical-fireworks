@@ -8,8 +8,7 @@ const colorCycle = [
   "rgb(255, 116, 81)", // orange
 ]
 
-// TODO: Clearly comment this code
-// TODO: Tweak the color effect changes to be smoother
+// Display's the Title "Mathematical Playgrounds" with its color changing effect
 class Title extends React.Component {
   constructor(props) {
     super(props)
@@ -22,7 +21,7 @@ class Title extends React.Component {
   updateColors() {
     const oldColors = this.state.colors
     const newColors = oldColors.map(element => {
-      if (Math.random() > 0.98) {
+      if (Math.random() > 0.97) {
         return colorCycle[Math.floor(Math.random() * colorCycle.length)]
       } else {
         return element
@@ -58,8 +57,8 @@ class Title extends React.Component {
       this.id = setInterval(() => {
         this.updateColors()
         this.wrapLetters()
-      }, 100) // how often to randomly change colors
-    }, 1500) // how long to wait before starting to change colors
+      }, 200) // how often to randomly change colors
+    }, 1000) // how long to wait before starting to change colors
   }
 
   componentWillUnmount() {
