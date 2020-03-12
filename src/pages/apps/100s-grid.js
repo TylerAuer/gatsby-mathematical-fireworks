@@ -8,17 +8,36 @@ import ControlBtn from "../../components/control-btn"
 // TODO: Use element to organize the CSS and include :hover options
 // TODO: Work my way back through the code to see if I can optimize it before moving on
 
+const defaultStyle = {
+  border: "solid 1px rgba(255, 0, 141, .33)",
+  textAlign: "center",
+  verticalAlign: "center",
+  fontSize: "20px",
+  padding: "7px",
+}
+
+const shadedStyle = {
+  backgroundColor: "rgba(255, 230, 0, 1)",
+  color: "black",
+  border: "solid 1px rgba(255, 0, 141, .33)",
+  textAlign: "center",
+  verticalAlign: "center",
+  fontSize: "20px",
+  padding: "7px",
+}
+
 function InputField(props) {
   const style = {
     border: "2px solid rgb(255, 0, 141)",
     borderRadius: "40px",
     fontSize: "20px",
-    paddingLeft: "25px",
+    paddingLeft: "25px", // Helps the text appear centered
+    margin: "0px auto 15px auto",
   }
   return (
     <div className="col-xs-12 col-sm-6 col-md text-center">
       <label htmlFor="start">
-        <h5 style={{ margin: "25px auto 0px auto" }}>{props.title}</h5>
+        <h5 style={{ margin: "0px auto 0px auto" }}>{props.title}</h5>
       </label>
       <input
         style={style}
@@ -38,15 +57,22 @@ function InputField(props) {
 }
 
 function Cell(props) {
-  const cellStyle = {
-    border: "solid 1px rgba(255, 0, 141, .33)",
-    textAlign: "center",
-    verticalAlign: "center",
-    fontSize: "20px",
-    padding: "7px",
+  let style = defaultStyle
+  const shadedCells = props.shadedCells
+  console.log(props.id, shadedCells)
+
+  if (shadedCells.includes(props.id)) {
+    style = shadedStyle
   }
+
+  //BUG: ID needs to begin with a number. Changing this changes the onClick functions
   return (
-    <td id={"cell" + props.id} className="cell-in-100s-grid" style={cellStyle}>
+    <td
+      style={style}
+      id={props.id}
+      className="cell-in-100s-grid"
+      onClick={props.onClick}
+    >
       {props.value}
     </td>
   )
@@ -62,10 +88,18 @@ function Grid(props) {
   // loop for row
   for (let i = 0; i < rowsNeeded; i++) {
     let row = []
-    // loop for nums in each row
+    // loop for numbers in each row
     for (let j = 0; j < props.columns; j++) {
       if (counter <= props.endNum) {
-        row.push(<Cell id={counter} key={counter} value={counter} />)
+        row.push(
+          <Cell
+            id={counter}
+            key={counter}
+            value={counter}
+            onClick={props.onClick}
+            shadedCells={props.shadedCells}
+          />
+        )
       } else {
         row.push(<Cell id={counter} key={counter} value=" " />)
       }
@@ -91,11 +125,28 @@ class GridApp extends React.Component {
     super(props)
     this.handleChange = this.handleChange.bind(this)
     this.resetOnClick = this.resetOnClick.bind(this)
+    this.cellOnClick = this.cellOnClick.bind(this)
     this.state = {
       startNum: 1,
       endNum: 100,
       skipSize: 1,
       columns: 10,
+      shadedCells: [],
+    }
+  }
+
+  cellOnClick(e) {
+    const cellId = parseInt(e.target.id)
+    // remove cell from shadedCells (removes highlights)
+    if (this.state.shadedCells.includes(cellId)) {
+      const shadedCells = this.state.shadedCells
+      const newShadedCells = shadedCells.filter(id => id !== cellId)
+      this.setState({ shadedCells: newShadedCells })
+    } else {
+      // remove cell from shadedCells (removes highlights)
+      const newShadedCells = this.state.shadedCells
+      newShadedCells.push(cellId)
+      this.setState({ shadedCells: newShadedCells })
     }
   }
 
@@ -107,6 +158,8 @@ class GridApp extends React.Component {
       columns: 10,
     })
   }
+
+  // TODO: Add OnClick for Clear button which empties this.state.shadedCells
 
   handleChange(e) {
     // Avoids crash when user deletes current value in input
@@ -130,19 +183,24 @@ class GridApp extends React.Component {
           id="button-bank"
         >
           <ControlBtn
-            className="btn btn-danger"
+            style={{ margin: "10px 5px" }}
+            className="btn btn-dark"
+            text="1"
+          />
+          <ControlBtn
+            style={{ margin: "10px 5px" }}
+            className="btn btn-lg btn-warning"
+            text="Clear"
+          />
+          <ControlBtn
+            style={{ margin: "10px 5px" }}
+            className="btn btn-lg btn-danger"
             text="Reset"
             onClick={this.resetOnClick}
           />
-          {/* <ButtonBank
-            startNum={this.state.startNum}
-            endNum={this.state.endNum}
-            skipSize={this.state.skipSize}
-            columns={this.state.columns}
-          /> */}
         </div>
         <div style={{ margin: "10px auto" }} id="settings-bank">
-          <form style={{ margin: "0px auto 30px auto" }}>
+          <form>
             <div className="form-row">
               <InputField
                 title="Start"
@@ -188,6 +246,8 @@ class GridApp extends React.Component {
             endNum={this.state.endNum}
             skipSize={this.state.skipSize}
             columns={this.state.columns}
+            shadedCells={this.state.shadedCells}
+            onClick={this.cellOnClick}
           />
         </div>
       </Layout>
