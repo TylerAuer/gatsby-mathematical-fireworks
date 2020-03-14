@@ -55,9 +55,46 @@ function InputField(props) {
   )
 }
 
+function ControlBtns(props) {
+  let skipCountBtns = []
+  for (let i = 1; i <= 10; i++) {
+    skipCountBtns.push(
+      <ControlBtn
+        style={{ margin: "0px 2px" }}
+        className="btn btn-dark"
+        key={i}
+        value={i}
+        text={i}
+        onClick={props.numOnClick}
+      />
+    )
+  }
+
+  return (
+    <div
+      style={{ margin: "0px auto" }}
+      className="container text-center"
+      id="button-bank"
+    >
+      {skipCountBtns}
+      <ControlBtn
+        style={{ margin: "5px" }}
+        className="btn btn-lg btn-warning"
+        text="Clear"
+        onClick={props.clearOnClick}
+      />
+      <ControlBtn
+        style={{ margin: "5px" }}
+        className="btn btn-lg btn-danger"
+        text="Reset"
+        onClick={props.resetOnClick}
+      />
+    </div>
+  )
+}
+
 function Cell(props) {
   let style = defaultStyle
-  console.log(props.id, props.shadedCells)
 
   const shadedCells = props.shadedCells
 
@@ -104,7 +141,7 @@ function Grid(props) {
           <Cell
             id={"cell" + counter}
             key={counter}
-            value={counter}
+            value=" "
             shadedCells={props.shadedCells}
           />
         )
@@ -131,6 +168,7 @@ class GridApp extends React.Component {
     super(props)
     this.handleChange = this.handleChange.bind(this)
     this.resetOnClick = this.resetOnClick.bind(this)
+    this.numOnClick = this.numOnClick.bind(this)
     this.cellOnClick = this.cellOnClick.bind(this)
     this.clearOnClick = this.clearOnClick.bind(this)
     this.state = {
@@ -156,6 +194,29 @@ class GridApp extends React.Component {
       newShadedCells.push(cellId)
       this.setState({ shadedCells: newShadedCells })
     }
+  }
+
+  numOnClick(e) {
+    // make array of cell Ids to add to state.shadedCells
+    const divisor = parseInt(e.target.value)
+
+    let newCellsToShade = []
+    const currentShadedCells = this.state.shadedCells
+    for (
+      let i = this.state.startNum;
+      i <= this.state.endNum;
+      i += this.state.skipSize
+    ) {
+      if (i % divisor === 0 && !currentShadedCells.includes("cell" + i)) {
+        newCellsToShade.push("cell" + i)
+      }
+    }
+    this.setState({
+      shadedCells: currentShadedCells.concat(newCellsToShade),
+    })
+
+    // recursively call setTimeout and shift() first value into state.shadedCells
+    // continue until shading is done
   }
 
   resetOnClick(e) {
@@ -187,33 +248,8 @@ class GridApp extends React.Component {
   }
 
   render() {
-    console.log(this.state)
-
     return (
       <Layout>
-        <div
-          style={{ margin: "10px auto" }}
-          className="container text-center"
-          id="button-bank"
-        >
-          <ControlBtn
-            style={{ margin: "10px 5px" }}
-            className="btn btn-dark"
-            text="1"
-          />
-          <ControlBtn
-            style={{ margin: "10px 5px" }}
-            className="btn btn-lg btn-warning"
-            text="Clear"
-            onClick={this.clearOnClick}
-          />
-          <ControlBtn
-            style={{ margin: "10px 5px" }}
-            className="btn btn-lg btn-danger"
-            text="Reset"
-            onClick={this.resetOnClick}
-          />
-        </div>
         <div style={{ margin: "10px auto" }} id="settings-bank">
           <form>
             <div className="form-row">
@@ -252,6 +288,16 @@ class GridApp extends React.Component {
             </div>
           </form>
         </div>
+        <ControlBtns
+          startNum={this.state.startNum}
+          endNum={this.state.endNum}
+          skipSize={this.state.skipSize}
+          columns={this.state.columns}
+          shadedCells={this.state.shadedCells}
+          numOnClick={this.numOnClick}
+          clearOnClick={this.clearOnClick}
+          resetOnClick={this.resetOnClick}
+        />
         <div
           id="grid-container"
           style={{ overflowX: "auto", margin: "10px auto" }}

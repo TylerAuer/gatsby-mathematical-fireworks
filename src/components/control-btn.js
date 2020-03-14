@@ -6,6 +6,8 @@ const ControlBtn = props => {
       className={props.className}
       style={props.style}
       onClick={props.onClick}
+      key={props.value}
+      value={props.text}
     >
       {props.text}
     </button>
