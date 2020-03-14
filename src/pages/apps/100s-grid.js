@@ -58,8 +58,9 @@ function InputField(props) {
 
 function Cell(props) {
   let style = defaultStyle
+  console.log(props.id, props.shadedCells)
+
   const shadedCells = props.shadedCells
-  console.log(props.id, shadedCells)
 
   if (shadedCells.includes(props.id)) {
     style = shadedStyle
@@ -93,7 +94,7 @@ function Grid(props) {
       if (counter <= props.endNum) {
         row.push(
           <Cell
-            id={counter}
+            id={"cell" + counter}
             key={counter}
             value={counter}
             onClick={props.onClick}
@@ -101,7 +102,14 @@ function Grid(props) {
           />
         )
       } else {
-        row.push(<Cell id={counter} key={counter} value=" " />)
+        row.push(
+          <Cell
+            id={"cell" + counter}
+            key={counter}
+            value={counter}
+            shadedCells={props.shadedCells}
+          />
+        )
       }
       counter += props.skipSize
     }
@@ -136,14 +144,15 @@ class GridApp extends React.Component {
   }
 
   cellOnClick(e) {
-    const cellId = parseInt(e.target.id)
+    const cellId = e.target.id
     // remove cell from shadedCells (removes highlights)
     if (this.state.shadedCells.includes(cellId)) {
       const shadedCells = this.state.shadedCells
       const newShadedCells = shadedCells.filter(id => id !== cellId)
       this.setState({ shadedCells: newShadedCells })
+
+      // add cell Id to shadedCells (removes highlights)
     } else {
-      // remove cell from shadedCells (removes highlights)
       const newShadedCells = this.state.shadedCells
       newShadedCells.push(cellId)
       this.setState({ shadedCells: newShadedCells })
@@ -175,6 +184,8 @@ class GridApp extends React.Component {
   }
 
   render() {
+    console.log(this.state)
+
     return (
       <Layout>
         <div
