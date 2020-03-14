@@ -4,7 +4,6 @@ import ControlBtn from "../../components/control-btn"
 
 // TODO: Add skip count buttons 1 through 10 as round
 // TODO: Add skip count by... user input option
-// TODO: Redo margins so the grid customization inputs have the larger margin on the bottom not top
 // TODO: Use element to organize the CSS and include :hover options
 // TODO: Work my way back through the code to see if I can optimize it before moving on
 
@@ -66,7 +65,6 @@ function Cell(props) {
     style = shadedStyle
   }
 
-  //BUG: ID needs to begin with a number. Changing this changes the onClick functions
   return (
     <td
       style={style}
@@ -134,6 +132,7 @@ class GridApp extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.resetOnClick = this.resetOnClick.bind(this)
     this.cellOnClick = this.cellOnClick.bind(this)
+    this.clearOnClick = this.clearOnClick.bind(this)
     this.state = {
       startNum: 1,
       endNum: 100,
@@ -168,7 +167,11 @@ class GridApp extends React.Component {
     })
   }
 
-  // TODO: Add OnClick for Clear button which empties this.state.shadedCells
+  clearOnClick(e) {
+    this.setState({
+      shadedCells: [],
+    })
+  }
 
   handleChange(e) {
     // Avoids crash when user deletes current value in input
@@ -202,6 +205,7 @@ class GridApp extends React.Component {
             style={{ margin: "10px 5px" }}
             className="btn btn-lg btn-warning"
             text="Clear"
+            onClick={this.clearOnClick}
           />
           <ControlBtn
             style={{ margin: "10px 5px" }}
