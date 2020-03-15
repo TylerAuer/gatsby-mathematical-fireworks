@@ -2,7 +2,6 @@ import React from "react"
 import Layout from "../../components/layout"
 import ControlBtn from "../../components/control-btn"
 
-// TODO: Add skip count buttons 1 through 10 as round
 // TODO: Add skip count by... user input option
 // TODO: Use element to organize the CSS and include :hover options
 // TODO: Work my way back through the code to see if I can optimize it before moving on
