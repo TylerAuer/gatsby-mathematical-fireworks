@@ -1,28 +1,47 @@
 import React from "react"
+import styled from "@emotion/styled"
+import { css } from "@emotion/core"
 import Layout from "../../components/layout"
 import ControlBtn from "../../components/control-btn"
 
 // TODO: Add skip count by... user input option
-// TODO: Use element to organize the CSS and include :hover options
+// TODO: Add delay to counting btns
+// TODO: Refactor code using emotion
 // TODO: Work my way back through the code to see if I can optimize it before moving on
 
-const defaultStyle = {
-  border: "solid 1px rgba(255, 0, 141, .33)",
-  textAlign: "center",
-  verticalAlign: "center",
-  fontSize: "20px",
-  padding: "7px",
-}
+// $theme-pink:     rgba(255, 0, 141, 1);
+// $theme-blue:     rgba(20, 186, 204, 1);
+// $theme-yellow:   rgb(255, 230, 0);
+// $theme-green:    rgb(92, 221, 41);
+// $theme-red:      rgb(255, 116, 81);
 
-const shadedStyle = {
-  backgroundColor: "rgba(255, 230, 0, 1)",
-  color: "black",
-  border: "solid 1px rgba(255, 0, 141, .33)",
-  textAlign: "center",
-  verticalAlign: "center",
-  fontSize: "20px",
-  padding: "7px",
-}
+const defaultCellStyle = css`
+  border: solid 1px rgba(20, 186, 204, 1);
+  text-align: center;
+  vertical-align: center;
+  font-size: 20px;
+  padding: 7px;
+  &:hover {
+    background-color: rgba(255, 0, 141, 0.33);
+    cursor: pointer;
+  }
+`
+
+const shadedStyle = css`
+  background-color: rgba(255, 0, 141, 1);
+  border: solid 1px rgba(255, 0, 141, 1);
+  color: white;
+  border: none;
+  text-align: center;
+  vertical-align: center;
+  font-size: 20px;
+  padding: 7px;
+  &:hover {
+    background-color: rgba(255, 0, 141, 0.33);
+    color: black;
+    cursor: pointer;
+  }
+`
 
 function InputField(props) {
   const style = {
@@ -93,7 +112,7 @@ function ControlBtns(props) {
 }
 
 function Cell(props) {
-  let style = defaultStyle
+  let style = defaultCellStyle
 
   const shadedCells = props.shadedCells
 
@@ -103,7 +122,7 @@ function Cell(props) {
 
   return (
     <td
-      style={style}
+      css={style}
       id={props.id}
       className="cell-in-100s-grid"
       onClick={props.onClick}
