@@ -191,6 +191,7 @@ class GridApp extends React.Component {
     this.numOnClick = this.numOnClick.bind(this)
     this.cellOnClick = this.cellOnClick.bind(this)
     this.clearOnClick = this.clearOnClick.bind(this)
+    this.skipCounterId = null
     this.state = {
       startNum: 1,
       endNum: 100,
@@ -217,8 +218,6 @@ class GridApp extends React.Component {
   }
 
   shadeNewCells(arrOfCellsToShade) {
-    // Takes an array of cell ID like "cell23"
-    // Adds to state.shadedCells if not already there
     const cellId = arrOfCellsToShade.shift()
     this.setState(prevState => {
       if (!prevState.shadedCells.includes(cellId)) {
@@ -226,10 +225,11 @@ class GridApp extends React.Component {
         return { shadedCells: newShadedCells }
       }
     })
+
     if (arrOfCellsToShade.length > 0) {
-      const skipCountTimeoutID = setTimeout(() => {
+      this.skipCountTimeoutID = setTimeout(() => {
         this.shadeNewCells(arrOfCellsToShade)
-      }, 1)
+      }, 75)
     }
   }
 
@@ -237,7 +237,6 @@ class GridApp extends React.Component {
     // make array of cell Ids to add to state.shadedCells
     const divisor = parseInt(e.target.value)
     let newCellsToShade = []
-    const currentShadedCells = this.state.shadedCells
     for (
       let i = this.state.startNum;
       i <= this.state.endNum;
@@ -257,9 +256,11 @@ class GridApp extends React.Component {
       skipSize: 1,
       columns: 10,
     })
+    clearTimeout(this.skipCountTimeoutID)
   }
 
   clearOnClick(e) {
+    clearTimeout(this.skipCountTimeoutID)
     this.setState({
       shadedCells: [],
     })
