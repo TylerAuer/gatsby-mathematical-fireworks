@@ -8,12 +8,14 @@ import ControlBtn from "../../components/control-btn"
 // TODO: Add delay to counting btns
 // TODO: Refactor code using emotion
 // TODO: Work my way back through the code to see if I can optimize it before moving on
+// TODO: Add limits to the inputs so that the user doesn't crash the grid with number that are too large
 
-// $theme-pink:     rgba(255, 0, 141, 1);
-// $theme-blue:     rgba(20, 186, 204, 1);
-// $theme-yellow:   rgb(255, 230, 0);
-// $theme-green:    rgb(92, 221, 41);
-// $theme-red:      rgb(255, 116, 81);
+// Site color scheme
+// rgba(255, 0, 141, 1);    Pink
+// rgba(20, 186, 204, 1);   Blue
+// rgb(255, 230, 0);        Yellow
+// rgb(92, 221, 41);        Green
+// rgb(255, 116, 81);       Orange
 
 const defaultCellStyle = css`
   border: solid 1px rgba(20, 186, 204, 1);
@@ -214,10 +216,26 @@ class GridApp extends React.Component {
     }
   }
 
+  shadeNewCells(arrOfCellsToShade) {
+    // Takes an array of cell ID like "cell23"
+    // Adds to state.shadedCells if not already there
+    const cellId = arrOfCellsToShade.shift()
+    this.setState(prevState => {
+      if (!prevState.shadedCells.includes(cellId)) {
+        const newShadedCells = prevState.shadedCells.concat(cellId)
+        return { shadedCells: newShadedCells }
+      }
+    })
+    if (arrOfCellsToShade.length > 0) {
+      const skipCountTimeoutID = setTimeout(() => {
+        this.shadeNewCells(arrOfCellsToShade)
+      }, 1)
+    }
+  }
+
   numOnClick(e) {
     // make array of cell Ids to add to state.shadedCells
     const divisor = parseInt(e.target.value)
-
     let newCellsToShade = []
     const currentShadedCells = this.state.shadedCells
     for (
@@ -225,16 +243,11 @@ class GridApp extends React.Component {
       i <= this.state.endNum;
       i += this.state.skipSize
     ) {
-      if (i % divisor === 0 && !currentShadedCells.includes("cell" + i)) {
+      if (i % divisor === 0) {
         newCellsToShade.push("cell" + i)
       }
     }
-    this.setState({
-      shadedCells: currentShadedCells.concat(newCellsToShade),
-    })
-
-    // recursively call setTimeout and shift() first value into state.shadedCells
-    // continue until shading is done
+    this.shadeNewCells(newCellsToShade)
   }
 
   resetOnClick(e) {
