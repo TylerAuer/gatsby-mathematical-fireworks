@@ -1,14 +1,20 @@
 import React from "react"
-import styled from "@emotion/styled"
+// import styled from "@emotion/styled"
 import { css } from "@emotion/core"
 import Layout from "../../components/layout"
 import ControlBtn from "../../components/control-btn"
 
+// MUST DO FIRST!
+// TODO: !!!!JSDoc Comments for every component
+// TODO: !!!!Add limits to the inputs so that the user doesn't crash the grid with number that are too large
+// TODO: !!!!Eliminate all NPM/React Errors
+// Can do later
 // TODO: Add skip count by... user input option
-// TODO: Add delay to counting btns
-// TODO: Refactor code using emotion
+// TODO: Refine design on skip count buttons
 // TODO: Work my way back through the code to see if I can optimize it before moving on
-// TODO: Add limits to the inputs so that the user doesn't crash the grid with number that are too large
+// TODO: Add simple little tips to help people figure out how to use the page
+// TODO: Add Sieve of Eratosthenes
+// TODO: Add factor counter example
 
 // Site color scheme
 // rgba(255, 0, 141, 1);    Pink
@@ -18,7 +24,7 @@ import ControlBtn from "../../components/control-btn"
 // rgb(255, 116, 81);       Orange
 
 const defaultCellStyle = css`
-  border: solid 1px rgba(20, 186, 204, 1);
+  border: solid 1px rgba(255, 0, 141, 0.33);
   text-align: center;
   vertical-align: center;
   font-size: 20px;

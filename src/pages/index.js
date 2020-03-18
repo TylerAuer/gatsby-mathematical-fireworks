@@ -2,6 +2,8 @@ import React from "react"
 import Layout from "../components/layout"
 import Card from "../components/cards"
 
+// TODO: Make page prettier - Force buttons to bottom of cards
+
 const IndexPage = () => (
   <Layout>
     <div className="container">
