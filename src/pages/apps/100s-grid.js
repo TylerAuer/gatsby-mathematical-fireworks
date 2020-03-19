@@ -3,51 +3,16 @@ import React from "react"
 import { css } from "@emotion/core"
 import Layout from "../../components/layout"
 import ControlBtn from "../../components/control-btn"
+import Cell from "../../components/cell"
 
 // MUST DO FIRST!
 // TODO: !!!!Add limits to the inputs so that the user doesn't crash the grid with number that are too large
 // Can do later
 // TODO: Add skip count by... user input option
-// TODO: Refine design on skip count buttons
 // TODO: Work my way back through the code to see if I can optimize it before moving on
 // TODO: Add simple little tips to help people figure out how to use the page
 // TODO: Add Sieve of Eratosthenes
 // TODO: Add factor counter example
-
-/**
- * Style for un-highlighted cells
- */
-const defaultCellStyle = css`
-  border: solid 1px rgba(255, 0, 141, 0.33);
-  text-align: center;
-  vertical-align: center;
-  font-size: 20px;
-  padding: 7px;
-  &:hover {
-    background-color: rgba(255, 0, 141, 0.33);
-    cursor: pointer;
-  }
-`
-
-/**
- * Styles for highlighted cells
- */
-const shadedStyle = css`
-  background-color: rgba(255, 0, 141, 1);
-  border: solid 1px rgba(255, 0, 141, 1);
-  color: white;
-  border: none;
-  text-align: center;
-  vertical-align: center;
-  font-size: 20px;
-  padding: 7px;
-  &:hover {
-    background-color: rgba(255, 0, 141, 1);
-    color: white;
-    font-weight: bolder;
-    cursor: pointer;
-  }
-`
 
 /**
  * Style for the user input fields that control the grid
@@ -166,30 +131,6 @@ function ControlBtns(props) {
         onClick={props.resetOnClick}
       />
     </div>
-  )
-}
-
-/**
- * Component for cells in the table
- */
-function Cell(props) {
-  let style = defaultCellStyle
-
-  const shadedCells = props.shadedCells
-
-  if (shadedCells.includes(props.id)) {
-    style = shadedStyle
-  }
-
-  return (
-    <td
-      css={style}
-      id={props.id}
-      onClick={props.onClick}
-      onKeyDown={props.onClick}
-    >
-      {props.value}
-    </td>
   )
 }
 
