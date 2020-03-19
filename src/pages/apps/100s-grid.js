@@ -22,6 +22,9 @@ import ControlBtn from "../../components/control-btn"
 // rgb(92, 221, 41);        Green
 // rgb(255, 116, 81);       Orange
 
+/**
+ * Style for un-highlighted cells
+ */
 const defaultCellStyle = css`
   border: solid 1px rgba(255, 0, 141, 0.33);
   text-align: center;
@@ -34,6 +37,9 @@ const defaultCellStyle = css`
   }
 `
 
+/**
+ * Styles for highlighted cells
+ */
 const shadedStyle = css`
   background-color: rgba(255, 0, 141, 1);
   border: solid 1px rgba(255, 0, 141, 1);
@@ -50,28 +56,83 @@ const shadedStyle = css`
   }
 `
 
-function InputField(props) {
-  const style = {
-    border: "2px solid rgb(255, 0, 141)",
-    borderRadius: "40px",
-    fontSize: "20px",
-    paddingLeft: "25px", // Helps the text appear centered
-    margin: "0px auto 15px auto",
+/**
+ * Style for the user input fields that control the grid
+ */
+const inputStyle = css`
+  border: 2px solid rgb(255, 0, 141);
+  border-radius: 40px;
+  font-size: 20px;
+  padding-left: 25px;
+  margin: 0px auto 15px auto;
+  &:hover {
+    border-width: 3px;
   }
+`
+
+const skipCountBtnStyle = css`
+  margin: 3px 2px;
+  background-color: rgb(255, 0, 141);
+  border: none;
+  border-radius: 5px;
+  height: 48px;
+  width: 48px;
+  font-size: 20px;
+  font-family: "Bungee", cursive;
+  &:hover,
+  &:focus {
+    background-color: rgba(20, 186, 204, 1);
+  }
+`
+// Site color scheme
+// rgba(255, 0, 141, 1);    Pink
+// rgba(20, 186, 204, 1);   Blue
+// rgb(255, 230, 0);        Yellow
+// rgb(92, 221, 41);        Green
+// rgb(255, 116, 81);       Orange
+
+const clearBtnStyle = css`
+  margin: 3px 2px;
+  font-family: "Bungee", cursive;
+  background-color: rgb(255, 116, 81);
+  color: white;
+  &:hover,
+  &:focus {
+    color: black;
+    background-color: white;
+    border: 1px solid rgba(255, 0, 141, 1);
+  }
+`
+
+const resetBtnStyle = css`
+  margin: 3px 2px;
+  font-family: "Bungee", cursive;
+  background-color: rgba(20, 186, 204, 1);
+  color: white;
+  &:hover,
+  &:focus {
+    background-color: rgb(92, 221, 41);
+    color: white;
+  }
+`
+
+/**
+ * Component that holds the user inputs for setting up the grid
+ */
+function InputField(props) {
   return (
     <div className="col-xs-12 col-sm-6 col-md text-center">
       <label htmlFor="start">
         <h5 style={{ margin: "0px auto 0px auto" }}>{props.title}</h5>
       </label>
       <input
-        style={style}
+        css={inputStyle}
         id={props.name}
         name={props.name}
         value={props.value}
         onChange={props.onChange}
         type="number"
         className="form-control text-center"
-        placeholder={props.placeholder}
         min={props.min}
         max={props.max}
         step="1"
@@ -80,12 +141,15 @@ function InputField(props) {
   )
 }
 
+/**
+ * Component for the buttons that skip count
+ */
 function ControlBtns(props) {
   let skipCountBtns = []
   for (let i = 1; i <= 10; i++) {
     skipCountBtns.push(
       <ControlBtn
-        style={{ margin: "0px 2px" }}
+        css={skipCountBtnStyle}
         className="btn btn-dark"
         key={i}
         value={i}
@@ -103,21 +167,24 @@ function ControlBtns(props) {
     >
       {skipCountBtns}
       <ControlBtn
-        style={{ margin: "5px" }}
-        className="btn btn-lg btn-warning"
-        text="Clear"
+        css={clearBtnStyle}
+        className="btn btn-lg"
+        text="Clear Colors"
         onClick={props.clearOnClick}
       />
       <ControlBtn
-        style={{ margin: "5px" }}
-        className="btn btn-lg btn-danger"
-        text="Reset"
+        css={resetBtnStyle}
+        className="btn btn-lg"
+        text="Reset Grid"
         onClick={props.resetOnClick}
       />
     </div>
   )
 }
 
+/**
+ * Component for cells in the table
+ */
 function Cell(props) {
   let style = defaultCellStyle
 
@@ -140,6 +207,9 @@ function Cell(props) {
   )
 }
 
+/**
+ * Component for the whole grid
+ */
 function Grid(props) {
   const rowsNeeded = Math.ceil(
     Math.ceil((1 + (props.endNum - props.startNum)) / props.skipSize) /
@@ -189,6 +259,10 @@ function Grid(props) {
   )
 }
 
+/**
+ * Highest level component
+ * State holds shadedCells list and the settings to build the grid
+ */
 class GridApp extends React.Component {
   constructor(props) {
     super(props)
@@ -207,6 +281,7 @@ class GridApp extends React.Component {
     }
   }
 
+  // onCLick function for cells in the grid
   cellOnClick(e) {
     const cellId = e.target.id
     // remove cell from shadedCells (removes highlights)
@@ -223,6 +298,11 @@ class GridApp extends React.Component {
     }
   }
 
+  /**
+   * Utility function
+   * Shades previously unshaded cells after a timeout to make the skip counting visible
+   * @param {array} arrOfCellsToShade list of cells (ex: ["cell2", "cell25"]) that need to be shaded
+   */
   shadeNewCells(arrOfCellsToShade) {
     const cellId = arrOfCellsToShade.shift()
     this.setState(prevState => {
@@ -239,6 +319,7 @@ class GridApp extends React.Component {
     }
   }
 
+  // onClick function for skipCounting controls
   numOnClick(e) {
     // make array of cell Ids to add to state.shadedCells
     const divisor = parseInt(e.target.value)
@@ -255,6 +336,15 @@ class GridApp extends React.Component {
     this.shadeNewCells(newCellsToShade)
   }
 
+  // onClick function for clear button
+  clearOnClick(e) {
+    clearTimeout(this.skipCountTimeoutID)
+    this.setState({
+      shadedCells: [],
+    })
+  }
+
+  // onClick function for reset grid button
   resetOnClick(e) {
     this.setState({
       startNum: 1,
@@ -265,19 +355,13 @@ class GridApp extends React.Component {
     clearTimeout(this.skipCountTimeoutID)
   }
 
-  clearOnClick(e) {
-    clearTimeout(this.skipCountTimeoutID)
-    this.setState({
-      shadedCells: [],
-    })
-  }
-
+  // handleChange function for the input fields
   handleChange(e) {
     // Avoids crash when user deletes current value in input
     if (e.target.value === "") {
       this.setState({ [e.target.name]: 1 })
 
-      // Avoids crash when skipCount is set to 0
+      // Avoids crash when skipCount is set to 0 or below
     } else if (e.target.name === "skipSize" && parseInt(e.target.value) <= 0) {
       this.setState({ [e.target.name]: 1 })
     } else {
