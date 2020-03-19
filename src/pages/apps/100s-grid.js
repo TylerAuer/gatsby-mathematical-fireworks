@@ -7,7 +7,6 @@ import ControlBtn from "../../components/control-btn"
 // MUST DO FIRST!
 // TODO: !!!!JSDoc Comments for every component
 // TODO: !!!!Add limits to the inputs so that the user doesn't crash the grid with number that are too large
-// TODO: !!!!Eliminate all NPM/React Errors
 // Can do later
 // TODO: Add skip count by... user input option
 // TODO: Refine design on skip count buttons
@@ -134,6 +133,7 @@ function Cell(props) {
       id={props.id}
       className="cell-in-100s-grid"
       onClick={props.onClick}
+      onKeyDown={props.onClick}
     >
       {props.value}
     </td>
