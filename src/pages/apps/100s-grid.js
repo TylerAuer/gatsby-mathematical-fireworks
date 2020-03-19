@@ -42,8 +42,9 @@ const shadedStyle = css`
   font-size: 20px;
   padding: 7px;
   &:hover {
-    background-color: rgba(255, 0, 141, 0.33);
-    color: black;
+    background-color: rgba(255, 0, 141, 1);
+    color: white;
+    font-weight: bolder;
     cursor: pointer;
   }
 `
@@ -184,7 +185,6 @@ function Cell(props) {
     <td
       css={style}
       id={props.id}
-      className="cell-in-100s-grid"
       onClick={props.onClick}
       onKeyDown={props.onClick}
     >
