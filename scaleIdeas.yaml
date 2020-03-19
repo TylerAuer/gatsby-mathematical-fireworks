@@ -1,0 +1,33 @@
+---
+units:
+  - time
+  - volume
+  - mass
+  - population
+  - distance
+categories:
+  - news
+  - fun
+  - gross
+numbers:
+  - number: 320000000
+    desc: 320,000,000 cubic metres of sand were used to build The World in Dubai.
+    units:
+      - volume
+    categories:
+      - man-made
+    src:
+  - number: 103400000
+    desc: 103,400,000 people watched Super Bowl LII on Sunday where a 30-second ad costs $5,000,000. So, advertisers spent about 10 cents for 1 minute of your attention.
+    units:
+      - population
+    categories:
+      - man-made
+    src: https://www.cbsnews.com/news/super-bowl-lii-tv-ratings/
+  - number: 23249425
+    desc: GIMPS found a new Mersenne Prime that is 23,249,425 digits long. It would take 83,034 tweets to display every digit of that prime number.
+    units:
+      - digits
+    categories:
+      - math
+    src: https://fivethirtyeight.com/features/we-have-a-new-prime-number-and-its-23-million-digits-long/
