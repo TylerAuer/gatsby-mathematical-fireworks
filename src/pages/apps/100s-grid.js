@@ -5,7 +5,6 @@ import Layout from "../../components/layout"
 import ControlBtn from "../../components/control-btn"
 
 // MUST DO FIRST!
-// TODO: !!!!JSDoc Comments for every component
 // TODO: !!!!Add limits to the inputs so that the user doesn't crash the grid with number that are too large
 // Can do later
 // TODO: Add skip count by... user input option
@@ -14,13 +13,6 @@ import ControlBtn from "../../components/control-btn"
 // TODO: Add simple little tips to help people figure out how to use the page
 // TODO: Add Sieve of Eratosthenes
 // TODO: Add factor counter example
-
-// Site color scheme
-// rgba(255, 0, 141, 1);    Pink
-// rgba(20, 186, 204, 1);   Blue
-// rgb(255, 230, 0);        Yellow
-// rgb(92, 221, 41);        Green
-// rgb(255, 116, 81);       Orange
 
 /**
  * Style for un-highlighted cells
@@ -84,12 +76,6 @@ const skipCountBtnStyle = css`
     background-color: rgba(20, 186, 204, 1);
   }
 `
-// Site color scheme
-// rgba(255, 0, 141, 1);    Pink
-// rgba(20, 186, 204, 1);   Blue
-// rgb(255, 230, 0);        Yellow
-// rgb(92, 221, 41);        Green
-// rgb(255, 116, 81);       Orange
 
 const clearBtnStyle = css`
   margin: 3px 2px;
