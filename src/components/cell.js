@@ -51,6 +51,7 @@ function Cell(props) {
   return (
     <td
       css={style}
+      key={props.id}
       id={props.id}
       onClick={props.onClick}
       onKeyDown={props.onClick}

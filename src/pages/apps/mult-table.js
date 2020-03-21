@@ -2,6 +2,7 @@ import React from "react"
 import { css } from "@emotion/core"
 import Layout from "../../components/layout"
 import Cell from "../../components/cell"
+import InputField from "../../components/inputField"
 
 // TODO: Create customization controls (randomize, order, largest factor), hide products
 // TODO: Make columns and rows clickable to highlight the row
@@ -34,6 +35,7 @@ const MultTable = props => {
         onClick={props.headerOnClick}
         onKeyDown={props.headerOnClick}
         value={num}
+        key={num}
       >
         {num}
       </th>
@@ -47,6 +49,7 @@ const MultTable = props => {
     let row = [
       <th
         id={"rowHead" + rowNum}
+        key={"rowHead" + rowNum}
         className={"row-header"}
         css={tableHeaderStyle}
         onClick={props.headerOnClick}
@@ -60,6 +63,7 @@ const MultTable = props => {
       row.push(
         <Cell
           id={"row" + rowNum + "col" + colNum}
+          key={"row" + rowNum + "col" + colNum}
           value={rowNum * colNum}
           shadedCells={props.shadedCells}
           onClick={props.cellOnClick}
@@ -77,7 +81,9 @@ const MultTable = props => {
         text-align: center;
       `}
     >
-      <thead>{headerRow}</thead>
+      <thead>
+        <tr>{headerRow}</tr>
+      </thead>
       <tbody>{arrOfRows}</tbody>
     </table>
   )
@@ -88,10 +94,13 @@ class MultTableApp extends React.Component {
     super(props)
     this.cellOnClick = this.cellOnClick.bind(this)
     this.headerCellOnClick = this.headerCellOnClick.bind(this)
+    this.handleChange = this.handleChange.bind(this)
     this.skipCounterId = null
     this.state = {
-      colFactors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 144],
-      rowFactors: [2, 4, 6, 8, 10, 1, 3, 5, 7, 9],
+      colCount: 10,
+      rowCount: 10,
+      colFactors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      rowFactors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       shadedCells: [],
     }
   }
@@ -149,9 +158,53 @@ class MultTableApp extends React.Component {
     }
   }
 
+  //TODO: Add checks to make sure the user inputs make sense and don't crash the app
+  // handleChange function for the input fields
+  handleChange(e) {
+    // updates the value in the input field
+    this.setState({ [e.target.name]: parseInt(e.target.value) })
+    // re-renders the table
+    let newFactorArr = []
+    for (let i = 1; i <= e.target.value; i++) {
+      newFactorArr.push(i)
+    }
+    if (e.target.name === "rowCount") {
+      this.setState({
+        rowFactors: newFactorArr,
+      })
+    } else {
+      this.setState({
+        colFactors: newFactorArr,
+      })
+    }
+  }
+
   render() {
     return (
       <Layout>
+        <div style={{ margin: "10px auto" }} id="settings-bank">
+          <form>
+            <div className="form-row">
+              <InputField
+                title="Rows"
+                name="rowCount"
+                value={this.state.rowCount}
+                min="1"
+                max="1000"
+                onChange={this.handleChange}
+              />
+              <InputField
+                title="Columns"
+                name="colCount"
+                value={this.state.colCount}
+                min="1"
+                max="50"
+                onChange={this.handleChange}
+              />
+            </div>
+          </form>
+        </div>
+
         <div
           css={css`
             overflow-x: auto;

@@ -4,6 +4,7 @@ import { css } from "@emotion/core"
 import Layout from "../../components/layout"
 import ControlBtn from "../../components/control-btn"
 import Cell from "../../components/cell"
+import InputField from "../../components/inputField"
 
 // MUST DO FIRST!
 // TODO: !!!!Add limits to the inputs so that the user doesn't crash the grid with number that are too large
@@ -13,20 +14,6 @@ import Cell from "../../components/cell"
 // TODO: Add simple little tips to help people figure out how to use the page
 // TODO: Add Sieve of Eratosthenes
 // TODO: Add factor counter example
-
-/**
- * Style for the user input fields that control the grid
- */
-const inputStyle = css`
-  border: 2px solid rgb(255, 0, 141);
-  border-radius: 40px;
-  font-size: 20px;
-  padding-left: 25px;
-  margin: 0px auto 15px auto;
-  &:hover {
-    border-width: 3px;
-  }
-`
 
 const skipCountBtnStyle = css`
   margin: 3px 2px;
@@ -67,31 +54,6 @@ const resetBtnStyle = css`
     color: white;
   }
 `
-
-/**
- * Component that holds the user inputs for setting up the grid
- */
-function InputField(props) {
-  return (
-    <div className="col-xs-12 col-sm-6 col-md text-center">
-      <label htmlFor="start">
-        <h5 style={{ margin: "0px auto 0px auto" }}>{props.title}</h5>
-      </label>
-      <input
-        css={inputStyle}
-        id={props.name}
-        name={props.name}
-        value={props.value}
-        onChange={props.onChange}
-        type="number"
-        className="form-control text-center"
-        min={props.min}
-        max={props.max}
-        step="1"
-      />
-    </div>
-  )
-}
 
 /**
  * Component for the buttons that skip count
