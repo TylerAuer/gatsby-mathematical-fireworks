@@ -3,9 +3,35 @@ import { css } from "@emotion/core"
 import Layout from "../../components/layout"
 import Cell from "../../components/cell"
 import InputField from "../../components/inputField"
+import ControlBtn from "../../components/control-btn"
 
 // TODO: Create customization controls (randomize, order, largest factor), hide products
 // TODO: Make columns and rows clickable to highlight the row
+
+const clearBtnStyle = css`
+  margin: 3px 2px;
+  font-family: "Bungee", cursive;
+  background-color: rgb(255, 116, 81);
+  color: white;
+  &:hover,
+  &:focus {
+    color: black;
+    background-color: white;
+    border: 1px solid rgba(255, 0, 141, 1);
+  }
+`
+
+const resetBtnStyle = css`
+  margin: 3px 2px;
+  font-family: "Bungee", cursive;
+  background-color: rgba(20, 186, 204, 1);
+  color: white;
+  &:hover,
+  &:focus {
+    background-color: rgb(92, 221, 41);
+    color: white;
+  }
+`
 
 //
 const MultTable = props => {
@@ -95,7 +121,8 @@ class MultTableApp extends React.Component {
     this.cellOnClick = this.cellOnClick.bind(this)
     this.headerCellOnClick = this.headerCellOnClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.skipCounterId = null
+    this.clearOnClick = this.clearOnClick.bind(this)
+    this.resetOnClick = this.resetOnClick.bind(this)
     this.state = {
       colCount: 10,
       rowCount: 10,
@@ -152,7 +179,7 @@ class MultTableApp extends React.Component {
     })
 
     if (arrOfCellsToShade.length > 0) {
-      this.skipCountTimeoutID = setTimeout(() => {
+      this.skipCounterID = setTimeout(() => {
         this.shadeNewCells(arrOfCellsToShade)
       }, 75)
     }
@@ -179,6 +206,25 @@ class MultTableApp extends React.Component {
     }
   }
 
+  // onClick function for clear button
+  clearOnClick(e) {
+    clearTimeout(this.skipCounterID)
+    this.setState({
+      shadedCells: [],
+    })
+  }
+
+  // onClick function for reset grid button
+  resetOnClick(e) {
+    this.setState({
+      colCount: 10,
+      rowCount: 10,
+      colFactors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      rowFactors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    })
+    clearTimeout(this.skipCounterID)
+  }
+
   render() {
     return (
       <Layout>
@@ -203,6 +249,25 @@ class MultTableApp extends React.Component {
               />
             </div>
           </form>
+        </div>
+
+        <div
+          style={{ margin: "0px auto" }}
+          className="container text-center"
+          id="button-bank"
+        >
+          <ControlBtn
+            css={clearBtnStyle}
+            className="btn btn-lg"
+            text="Clear Colors"
+            onClick={this.clearOnClick}
+          />
+          <ControlBtn
+            css={resetBtnStyle}
+            className="btn btn-lg"
+            text="Reset Grid"
+            onClick={this.resetOnClick}
+          />
         </div>
 
         <div

@@ -160,7 +160,6 @@ class GridApp extends React.Component {
     this.numOnClick = this.numOnClick.bind(this)
     this.cellOnClick = this.cellOnClick.bind(this)
     this.clearOnClick = this.clearOnClick.bind(this)
-    this.skipCounterId = null
     this.state = {
       startNum: 1,
       endNum: 100,
