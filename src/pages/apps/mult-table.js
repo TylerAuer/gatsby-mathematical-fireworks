@@ -3,23 +3,36 @@ import { css } from "@emotion/core"
 import Layout from "../../components/layout"
 import Cell from "../../components/cell"
 
-// TODO: Add basic styles and onClick functions to cells
 // TODO: Create customization controls (randomize, order, largest factor), hide products
 // TODO: Make columns and rows clickable to highlight the row
 
 //
 const MultTable = props => {
   // Generate header row, add className to style header cells
-  let headerRow = [<th></th>]
+  const tableHeaderStyle = css`
+    font-size 22px;
+    color: white;
+    border: solid 2px white;
+    background-color: rgba(255, 0, 141, 0.8);
+    &:hover {
+      background-color: rgba(255, 0, 141, 1);
+    }
+  `
+
+  let headerRow = [
+    <th css={tableHeaderStyle} style={{ backgroundColor: "black" }}>
+      X
+    </th>,
+  ]
   props.colFactors.forEach(num => {
-    headerRow.push(<th className="mult-table-header">{num}</th>)
+    headerRow.push(<th css={tableHeaderStyle}>{num}</th>)
   })
 
   // Generate rows which are the product of the matching row and column header text
   let arrOfRows = []
 
   props.rowFactors.forEach(rowNum => {
-    let row = [<th className="mult-table-header">{rowNum}</th>]
+    let row = [<th css={tableHeaderStyle}>{rowNum}</th>]
     props.colFactors.forEach(colNum => {
       row.push(
         <Cell
