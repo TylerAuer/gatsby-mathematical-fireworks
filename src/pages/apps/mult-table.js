@@ -6,7 +6,6 @@ import InputField from "../../components/inputField"
 import ControlBtn from "../../components/control-btn"
 
 // TODO: Create customization controls (randomize, order, largest factor), hide products
-// TODO: Make columns and rows clickable to highlight the row
 
 const clearBtnStyle = css`
   margin: 3px 2px;
@@ -29,6 +28,18 @@ const resetBtnStyle = css`
   &:hover,
   &:focus {
     background-color: rgb(92, 221, 41);
+    color: white;
+  }
+`
+
+const randBtnStyle = css`
+  margin: 3px 2px;
+  font-family: "Bungee", cursive;
+  background-color: rgb(92, 221, 41);
+  color: white;
+  &:hover,
+  &:focus {
+    background-color: rgb(255, 230, 0);
     color: white;
   }
 `
@@ -123,6 +134,7 @@ class MultTableApp extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.clearOnClick = this.clearOnClick.bind(this)
     this.resetOnClick = this.resetOnClick.bind(this)
+    this.randOnClick = this.randOnClick.bind(this)
     this.state = {
       colCount: 10,
       rowCount: 10,
@@ -225,6 +237,34 @@ class MultTableApp extends React.Component {
     clearTimeout(this.skipCounterID)
   }
 
+  randOnClick(e) {
+    this.setState({
+      rowFactors: shuffle(this.state.rowFactors),
+      colFactors: shuffle(this.state.colFactors),
+    })
+
+    // Fisher-Yates (aka Knuth) Shuffle
+    function shuffle(array) {
+      var currentIndex = array.length,
+        temporaryValue,
+        randomIndex
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex)
+        currentIndex -= 1
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex]
+        array[currentIndex] = array[randomIndex]
+        array[randomIndex] = temporaryValue
+      }
+
+      return array
+    }
+  }
+
   render() {
     return (
       <Layout>
@@ -267,6 +307,12 @@ class MultTableApp extends React.Component {
             className="btn btn-lg"
             text="Reset Grid"
             onClick={this.resetOnClick}
+          />
+          <ControlBtn
+            css={randBtnStyle}
+            className="btn btn-lg"
+            text="Randomize"
+            onClick={this.randOnClick}
           />
         </div>
 
