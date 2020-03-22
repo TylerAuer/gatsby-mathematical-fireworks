@@ -18,6 +18,19 @@ const clearBtnStyle = css`
     background-color: white;
     border: 1px solid rgba(255, 0, 141, 1);
   }
+  $:select
+`
+
+const hideBtnStyle = css`
+  margin: 3px 2px;
+  font-family: "Bungee", cursive;
+  background-color: rgb(92, 221, 41);
+  color: white;
+  &:hover,
+  &:focus {
+    background-color: rgb(255, 230, 0);
+    color: white;
+  }
 `
 
 const resetBtnStyle = css`
@@ -97,11 +110,15 @@ const MultTable = props => {
       </th>,
     ]
     props.colFactors.forEach(colNum => {
+      let cellDisplayVal = ""
+      if (!props.hideCellValues) {
+        cellDisplayVal = rowNum * colNum
+      }
       row.push(
         <Cell
           id={"row" + rowNum + "col" + colNum}
           key={"row" + rowNum + "col" + colNum}
-          value={rowNum * colNum}
+          value={cellDisplayVal}
           shadedCells={props.shadedCells}
           onClick={props.cellOnClick}
         />
@@ -135,12 +152,14 @@ class MultTableApp extends React.Component {
     this.clearOnClick = this.clearOnClick.bind(this)
     this.resetOnClick = this.resetOnClick.bind(this)
     this.randOnClick = this.randOnClick.bind(this)
+    this.hideOnClick = this.hideOnClick.bind(this)
     this.state = {
       colCount: 10,
       rowCount: 10,
       colFactors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       rowFactors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       shadedCells: [],
+      hideCellValues: false,
     }
   }
 
@@ -265,6 +284,20 @@ class MultTableApp extends React.Component {
     }
   }
 
+  hideOnClick(e) {
+    if (this.state.hideCellValues) {
+      this.setState({
+        hideCellValues: false,
+      })
+      e.target.innerHTML = "Hide Products"
+    } else {
+      this.setState({
+        hideCellValues: true,
+      })
+      e.target.innerHTML = "Show Products"
+    }
+  }
+
   render() {
     return (
       <Layout>
@@ -297,6 +330,18 @@ class MultTableApp extends React.Component {
           id="button-bank"
         >
           <ControlBtn
+            css={randBtnStyle}
+            className="btn btn-lg"
+            text="Randomize"
+            onClick={this.randOnClick}
+          />
+          <ControlBtn
+            css={hideBtnStyle}
+            className="btn btn-lg"
+            text="Hide Products"
+            onClick={this.hideOnClick}
+          />
+          <ControlBtn
             css={clearBtnStyle}
             className="btn btn-lg"
             text="Clear Colors"
@@ -307,12 +352,6 @@ class MultTableApp extends React.Component {
             className="btn btn-lg"
             text="Reset Grid"
             onClick={this.resetOnClick}
-          />
-          <ControlBtn
-            css={randBtnStyle}
-            className="btn btn-lg"
-            text="Randomize"
-            onClick={this.randOnClick}
           />
         </div>
 
@@ -328,6 +367,7 @@ class MultTableApp extends React.Component {
             shadedCells={this.state.shadedCells}
             cellOnClick={this.cellOnClick}
             headerOnClick={this.headerCellOnClick}
+            hideCellValues={this.state.hideCellValues}
           />
         </div>
       </Layout>
