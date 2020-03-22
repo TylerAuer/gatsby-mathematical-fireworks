@@ -18,7 +18,6 @@ const clearBtnStyle = css`
     background-color: white;
     border: 1px solid rgba(255, 0, 141, 1);
   }
-  $:select
 `
 
 const hideBtnStyle = css`
@@ -65,6 +64,8 @@ const MultTable = props => {
     color: white;
     border: solid 2px white;
     background-color: rgba(255, 0, 141, 0.8);
+    min-width: 50px;
+    min-height: 45px;
     &:hover {
       background-color: rgba(255, 0, 141, 1);
       cursor: pointer;
