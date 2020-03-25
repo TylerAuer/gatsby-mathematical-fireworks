@@ -13,7 +13,7 @@ const AtomBuilder = props => {
     width: 6px;
     border-radius: 3px;
     margin: 2px;
-    transition-duration: 1250ms;
+    /* transition-duration: 1250ms; */
     background-color: rgba(255, 0, 141, 1);
   `
   const deadAtomStyle = css`
@@ -21,7 +21,7 @@ const AtomBuilder = props => {
     width: 6px;
     border-radius: 3px;
     margin: 2px;
-    transition-duration: 1250ms;
+    /* transition-duration: 1250ms; */
     background-color: rgba(255, 0, 141, 0); // $theme-pink
   `
 
@@ -67,7 +67,7 @@ class HalfLifeApp extends React.Component {
       decayEventProbability: 0.96593632892, // calculated as (5000/250)th root of 0.5
       decayEventCount: 0,
       halfLifeCount: 0,
-      timeElapsed: 0,
+      timeElapsed: 0, // in milliseconds
       atomArr: new Array(5000).fill(true),
     }
   }
@@ -85,28 +85,17 @@ class HalfLifeApp extends React.Component {
   }
 
   decayEvent() {
+    console.log("Decay event!")
     this.setState(state => {
       return { decayEventCount: state.decayEventCount++ }
     })
 
-    // counts halfLife events
-    if (
-      this.state.decayEventCount %
-        (this.state.halfLifeInMs / this.state.msBetweenDecayEvents) ===
-      0
-    ) {
-      this.setState(state => {
-        return { halfLifeCount: state.halfLifeCount++ }
-      })
-    }
-
     // runs probability event for each alive atom
+    let atomsRemoved = 0
     let newAtomsArr = this.state.atomArr.map(atom => {
       if (atom) {
         if (Math.random() > this.state.decayEventProbability) {
-          this.setState(state => {
-            return { atomsLeft: state.atomsLeft-- }
-          })
+          atomsRemoved += 1
           return false
         } else {
           return true
@@ -115,40 +104,51 @@ class HalfLifeApp extends React.Component {
         return false
       }
     })
-    console.log(newAtomsArr)
 
-    this.setState({
-      atomArr: newAtomsArr,
+    if (this.state.atomCount - atomsRemoved <= 0) {
+      this.stop()
+    }
+    this.setState(state => {
+      return {
+        atomArr: newAtomsArr,
+        atomCount: (state.atomCount -= atomsRemoved),
+        decayEventCount: (state.decayEventCount += 1),
+        halfLifeCount: Math.floor(
+          state.decayEventCount /
+            (state.halfLifeInMs / state.msBetweenDecayEvents)
+        ),
+      }
     })
   }
 
-  startOnClick(e) {}
+  /**
+   * Starts or restarts the running of the simulation
+   */
+  start() {
+    this.stop()
+    console.log("Start Button Hit")
+    this.simHandle = setInterval(() => {
+      this.decayEvent()
+    }, this.state.msBetweenDecayEvents)
+  }
 
-  stopOnClick(e) {}
+  /**
+   * Stops the running of the simulation
+   */
+  stop() {
+    if (this.simHandle) {
+      clearInterval(this.simHandle)
+      this.simHandle = 0
+    }
+  }
 
-  // startOnClick(e) {
-  //   this.simHandle = setInterval(
-  //     () => decayEvent(),
-  //     this.config.msBetweenDecayEvents
-  //   );
-  //   this.timerHandle = setInterval(() => {
-  //     this.config.timeElapsed = (this.config.timeElapsed * 10 + 1) / 10;
-  //     const timer = document.getElementById("secElapsed");
-  //     timer.innerText = formatTimeVal(this.config.timeElapsed.toFixed(1));
-  //   }, 100);
-  // }
+  startOnClick(e) {
+    this.start()
+  }
 
-  // stopOnClick(e) {
-  //   if (this.simHandle) {
-  //       clearInterval(this.simHandle);
-  //       this.simHandle = 0;
-  //     }
-  //     if (this.timerHandle) {
-  //       clearInterval(this.timerHandle);
-  //       this.timerHandle = 0;
-  //     }
-  //   }
-  // }
+  stopOnClick(e) {
+    this.stop()
+  }
 
   render() {
     return (
@@ -168,7 +168,7 @@ class HalfLifeApp extends React.Component {
             to decay in the same way that it is impossible to know for sure if a
             coin will land on heads or tails. But, since there are <b>so</b>{" "}
             many atoms, we can make predictions about what the pattern will look
-            like. The amount of atoms that remain radioactive follows an
+            like. The amount of atoms that remain radioactive follows an{" "}
             <a href="https://www.desmos.com/calculator/y4kpct1jkq">
               exponential curve
             </a>
@@ -198,7 +198,7 @@ class HalfLifeApp extends React.Component {
             css={startBtnStyle}
             className="btn btn-lg"
             text="Start"
-            onClick={this.decayEvent}
+            onClick={this.startOnClick}
           />
           <ControlBtn
             css={stopBtnStyle}
