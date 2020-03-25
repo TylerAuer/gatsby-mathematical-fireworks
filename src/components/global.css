@@ -20,6 +20,7 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
 }
 
 h1,
@@ -34,4 +35,15 @@ h6 {
 
 h1 {
   color: rgba(255, 0, 141, 1);
+}
+
+a {
+  color: rgba(255, 0, 141, 1);
+  font-weight: bold;
+}
+
+a:hover {
+  color: rgba(255, 0, 141, 1);
+  text-shadow: rgba(255, 0, 141, 1);
+  text-decoration: underline rgba(20, 186, 204, 1);
 }
