@@ -2,6 +2,7 @@ import React from "react"
 import { css } from "@emotion/core"
 import Layout from "../../components/layout"
 import ControlBtn from "../../components/control-btn"
+import { prettyNum } from "../../components/numFormatter"
 
 const ctrlBtnStyle = css`
   margin: 3px 2px;
@@ -118,7 +119,7 @@ const rangeFormStyle = css`
 
 const DataDisplay = props => {
   return (
-    <div class="col-6 col-md-3">
+    <div className="col-6 col-md-3">
       <h3>{props.data}</h3>
       <h5
         css={css`
@@ -131,6 +132,9 @@ const DataDisplay = props => {
   )
 }
 
+// TODO: Make live atoms vibrate and then go still and gray when dead
+// Use a parent div to ensure they hold their size and position
+// how to make keyframes with emotion: https://emotion.sh/docs/keyframes
 const AtomBuilder = props => {
   const liveAtomStyle = css`
     height: 6px;
@@ -347,15 +351,15 @@ class HalfLifeApp extends React.Component {
             half-life of only 0.00292 <b>seconds</b>.
           </p>
           <form>
-            <div class="form-group" style={{ margin: "0px" }}>
-              <label for="user-input-hl">
+            <div className="form-group" style={{ margin: "0px" }}>
+              <label>
                 You can adjust the <b>half-life</b> of the atoms in this
                 simulation using this slider:
               </label>
               <input
                 id="user-input-hl"
                 type="range"
-                class="form-control-range"
+                className="form-control-range"
                 min="1000"
                 max="120000"
                 step="1000"
@@ -412,7 +416,10 @@ class HalfLifeApp extends React.Component {
               data={this.state.timeElapsed / 1000 + " sec."}
               title={"Time Elapsed"}
             />
-            <DataDisplay data={this.state.atomCount} title={"Atoms Left"} />
+            <DataDisplay
+              data={prettyNum(this.state.atomCount)}
+              title={"Atoms Left"}
+            />
           </div>
         </div>
         <AtomBuilder atomArr={this.state.atomArr} />

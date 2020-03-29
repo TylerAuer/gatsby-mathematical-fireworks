@@ -5,6 +5,7 @@ import Layout from "../../components/layout"
 import ControlBtn from "../../components/control-btn"
 import Cell from "../../components/cell"
 import InputField from "../../components/inputField"
+import { prettyNum } from "../../components/numFormatter"
 
 // MUST DO FIRST!
 // TODO: !!!!Add limits to the inputs so that the user doesn't crash the grid with number that are too large
@@ -116,7 +117,7 @@ function Grid(props) {
           <Cell
             id={"cell" + counter}
             key={counter}
-            value={counter}
+            value={prettyNum(counter)}
             onClick={props.onClick}
             shadedCells={props.shadedCells}
           />

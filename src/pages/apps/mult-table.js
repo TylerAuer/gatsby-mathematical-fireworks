@@ -4,6 +4,7 @@ import Layout from "../../components/layout"
 import Cell from "../../components/cell"
 import InputField from "../../components/inputField"
 import ControlBtn from "../../components/control-btn"
+import { prettyNum } from "../../components/numFormatter"
 
 // TODO: Create customization controls (randomize, order, largest factor), hide products
 
@@ -113,7 +114,7 @@ const MultTable = props => {
     props.colFactors.forEach(colNum => {
       let cellDisplayVal = ""
       if (!props.hideCellValues) {
-        cellDisplayVal = rowNum * colNum
+        cellDisplayVal = prettyNum(rowNum * colNum)
       }
       row.push(
         <Cell
