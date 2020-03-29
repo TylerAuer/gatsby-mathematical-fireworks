@@ -25,10 +25,100 @@ const resetBtnStyle = css`
     background-color: rgba(255, 0, 141, 1);
   }
 `
+const rangeFormStyle = css`
+  height: 40px;
+  -webkit-appearance: none;
+  margin: 0px 0;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 11px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 2px #000000;
+    background: #ff008d;
+    border-radius: 14px;
+    border: 1px solid #000000;
+  }
+  &::-webkit-slider-thumb {
+    box-shadow: 2px 2px 2px #000000;
+    border: 2px solid #ff008d;
+    height: 30px;
+    width: 40px;
+    border-radius: 7px;
+    background: #ffffff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -11px;
+  }
+  &:focus::-webkit-slider-runnable-track {
+    background: #ff008d;
+  }
+  &::-moz-range-track {
+    width: 100%;
+    height: 11px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 2px #000000;
+    background: #ff008d;
+    border-radius: 14px;
+    border: 1px solid #000000;
+  }
+  &::-moz-range-thumb {
+    box-shadow: 2px 2px 2px #000000;
+    border: 2px solid #ff008d;
+    height: 30px;
+    width: 40px;
+    border-radius: 7px;
+    background: #ffffff;
+    cursor: pointer;
+  }
+  &::-ms-track {
+    width: 100%;
+    height: 11px;
+    cursor: pointer;
+    animate: 0.2s;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+  &::-ms-fill-lower {
+    background: #ff008d;
+    border: 1px solid #000000;
+    border-radius: 28px;
+    box-shadow: 1px 1px 2px #000000;
+  }
+  &::-ms-fill-upper {
+    background: #ff008d;
+    border: 1px solid #000000;
+    border-radius: 28px;
+    box-shadow: 1px 1px 2px #000000;
+  }
+  &::-ms-thumb {
+    margin-top: 1px;
+    box-shadow: 2px 2px 2px #000000;
+    border: 2px solid #ff008d;
+    height: 30px;
+    width: 40px;
+    border-radius: 7px;
+    background: #ffffff;
+    cursor: pointer;
+  }
+  &:focus::-ms-fill-lower {
+    background: #ff008d;
+  }
+  &:focus::-ms-fill-upper {
+    background: #ff008d;
+  }
+`
 
 const DataDisplay = props => {
   return (
-    <div class="col">
+    <div class="col-6 col-md-3">
       <h3>{props.data}</h3>
       <h5
         css={css`
@@ -262,7 +352,7 @@ class HalfLifeApp extends React.Component {
             half-life of only 0.00292 <b>seconds</b>.
           </p>
           <form>
-            <div class="form-group">
+            <div class="form-group" style={{ margin: "0px" }}>
               <label for="user-input-hl">
                 You can adjust the <b>half-life</b> of the atoms in this
                 simulation using this slider:
@@ -276,6 +366,7 @@ class HalfLifeApp extends React.Component {
                 step="1000"
                 value={this.state.halfLifeInMs}
                 onChange={this.handleChangeToHalfLifeSlider}
+                css={rangeFormStyle}
               />
             </div>
           </form>
@@ -286,18 +377,20 @@ class HalfLifeApp extends React.Component {
           className="container text-center"
           id="button-bank"
         >
-          <ControlBtn
-            css={ctrlBtnStyle}
-            className="btn btn-lg"
-            text="Start"
-            onClick={this.startOnClick}
-          />
-          <ControlBtn
-            css={ctrlBtnStyle}
-            className="btn btn-lg"
-            text="Stop"
-            onClick={this.stopOnClick}
-          />
+          <div className="btn-group">
+            <ControlBtn
+              css={ctrlBtnStyle}
+              className="btn btn-lg"
+              text="Start"
+              onClick={this.startOnClick}
+            />
+            <ControlBtn
+              css={ctrlBtnStyle}
+              className="btn btn-lg"
+              text="Stop"
+              onClick={this.stopOnClick}
+            />
+          </div>
           <ControlBtn
             css={resetBtnStyle}
             className="btn btn-lg"
