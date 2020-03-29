@@ -211,9 +211,6 @@ class HalfLifeApp extends React.Component {
     )
   }
 
-  //BUG: Counts half-lives incorrectly when you move the slider while the simulation is running.
-  // Can fix by adding a fraction of a half-life to the state.halfLifeCounter
-  // Then use Math.floor() to only display full half-lives
   decayEvent() {
     this.setState(state => {
       return { decayEventCount: state.decayEventCount++ }
@@ -240,12 +237,10 @@ class HalfLifeApp extends React.Component {
     this.setState(state => {
       return {
         atomArr: newAtomsArr,
-        atomCount: (state.atomCount -= atomsRemoved),
+        atomCount: state.atomCount - atomsRemoved,
         decayEventCount: (state.decayEventCount += 1),
-        halfLifeCount: Math.floor(
-          state.decayEventCount /
-            (state.halfLifeInMs / state.msBetweenDecayEvents)
-        ),
+        halfLifeCount:
+          state.halfLifeCount + state.msBetweenDecayEvents / state.halfLifeInMs,
       }
     })
   }
@@ -410,7 +405,7 @@ class HalfLifeApp extends React.Component {
               title={"Half-life"}
             />
             <DataDisplay
-              data={this.state.halfLifeCount}
+              data={Math.floor(this.state.halfLifeCount)}
               title={"Half-lives Elapsed"}
             />
             <DataDisplay
