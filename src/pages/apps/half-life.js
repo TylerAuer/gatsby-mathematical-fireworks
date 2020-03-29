@@ -13,7 +13,7 @@ const AtomBuilder = props => {
     width: 6px;
     border-radius: 3px;
     margin: 2px;
-    /* transition-duration: 1250ms; */
+    transition-duration: 1500ms;
     background-color: rgba(255, 0, 141, 1);
   `
   const deadAtomStyle = css`
@@ -21,7 +21,7 @@ const AtomBuilder = props => {
     width: 6px;
     border-radius: 3px;
     margin: 2px;
-    /* transition-duration: 1250ms; */
+    transition-duration: 1500ms;
     background-color: rgba(255, 0, 141, 0); // $theme-pink
   `
 
@@ -64,7 +64,7 @@ class HalfLifeApp extends React.Component {
       atomCount: 5000,
       halfLifeInMs: 5000,
       msBetweenDecayEvents: 250,
-      decayEventProbability: 0.96593632892, // calculated as (5000/250)th root of 0.5
+      decayEventProbability: 0.96593632892, // calculated as (5000/1000)th root of 0.5
       decayEventCount: 0,
       halfLifeCount: 0,
       timeElapsed: 0, // in milliseconds
@@ -130,6 +130,14 @@ class HalfLifeApp extends React.Component {
     this.simHandle = setInterval(() => {
       this.decayEvent()
     }, this.state.msBetweenDecayEvents)
+
+    this.timerHandle = setInterval(() => {
+      this.setState(state => {
+        return {
+          timeElapsed: state.timeElapsed + state.msBetweenDecayEvents,
+        }
+      })
+    }, this.state.msBetweenDecayEvents)
   }
 
   /**
@@ -138,7 +146,9 @@ class HalfLifeApp extends React.Component {
   stop() {
     if (this.simHandle) {
       clearInterval(this.simHandle)
-      this.simHandle = 0
+    }
+    if (this.timerHandle) {
+      clearInterval(this.timerHandle)
     }
   }
 
