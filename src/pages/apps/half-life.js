@@ -1,11 +1,45 @@
 import React from "react"
 import { css } from "@emotion/core"
 import Layout from "../../components/layout"
-import InputField from "../../components/inputField"
 import ControlBtn from "../../components/control-btn"
 
-const startBtnStyle = css``
-const stopBtnStyle = css``
+const ctrlBtnStyle = css`
+  margin: 3px 2px;
+  font-family: "Bungee", cursive;
+  background-color: rgba(20, 186, 204, 1);
+  color: white;
+  &:hover,
+  &:focus {
+    background-color: rgb(92, 221, 41);
+    color: white;
+  }
+`
+const resetBtnStyle = css`
+  margin: 3px 2px;
+  font-family: "Bungee", cursive;
+  background-color: rgb(255, 116, 81);
+  color: white;
+  &:hover,
+  &:focus {
+    color: white;
+    background-color: rgba(255, 0, 141, 1);
+  }
+`
+
+const DataDisplay = props => {
+  return (
+    <div class="col">
+      <h3>{props.data}</h3>
+      <h5
+        css={css`
+          color: rgb(255, 116, 81);
+        `}
+      >
+        {props.title}
+      </h5>
+    </div>
+  )
+}
 
 const AtomBuilder = props => {
   const liveAtomStyle = css`
@@ -59,7 +93,10 @@ class HalfLifeApp extends React.Component {
     super(props)
     this.startOnClick = this.startOnClick.bind(this)
     this.stopOnClick = this.stopOnClick.bind(this)
-    this.decayEvent = this.decayEvent.bind(this)
+    this.resetOnClick = this.resetOnClick.bind(this)
+    this.handleChangeToHalfLifeSlider = this.handleChangeToHalfLifeSlider.bind(
+      this
+    )
     this.state = {
       atomCount: 5000,
       halfLifeInMs: 5000,
@@ -85,7 +122,6 @@ class HalfLifeApp extends React.Component {
   }
 
   decayEvent() {
-    console.log("Decay event!")
     this.setState(state => {
       return { decayEventCount: state.decayEventCount++ }
     })
@@ -126,7 +162,6 @@ class HalfLifeApp extends React.Component {
    */
   start() {
     this.stop()
-    console.log("Start Button Hit")
     this.simHandle = setInterval(() => {
       this.decayEvent()
     }, this.state.msBetweenDecayEvents)
@@ -158,6 +193,32 @@ class HalfLifeApp extends React.Component {
 
   stopOnClick(e) {
     this.stop()
+  }
+
+  resetOnClick(e) {
+    this.stop()
+    this.setState({
+      atomCount: 5000,
+      halfLifeInMs: 5000,
+      decayEventProbability: 0.96593632892, // calculated as (5000/1000)th root of 0.5
+      decayEventCount: 0,
+      halfLifeCount: 0,
+      timeElapsed: 0, // in milliseconds
+      atomArr: new Array(5000).fill(true),
+    })
+  }
+
+  // handleChange function for the input fields
+  handleChangeToHalfLifeSlider(e) {
+    const newDecayEventProbability = this.calcDecayEventProbability(
+      e.target.value,
+      this.state.msBetweenDecayEvents
+    )
+
+    this.setState({
+      decayEventProbability: newDecayEventProbability,
+      halfLifeInMs: e.target.value,
+    })
   }
 
   render() {
@@ -197,25 +258,71 @@ class HalfLifeApp extends React.Component {
             has a half-life of 703,800,000 <b>years</b>! While Boron-19 has a
             half-life of only 0.00292 <b>seconds</b>.
           </p>
+          <form>
+            <div class="form-group">
+              <label for="user-input-hl">
+                You can adjust the <b>half-life</b> of the atoms in this
+                simulation using this slider:
+              </label>
+              <input
+                id="user-input-hl"
+                type="range"
+                class="form-control-range"
+                min="250"
+                max="120000"
+                step="250"
+                value={this.state.halfLifeInMs}
+                onChange={this.handleChangeToHalfLifeSlider}
+              />
+            </div>
+          </form>
         </div>
 
         <div
-          style={{ margin: "0px auto" }}
+          style={{ margin: "10px auto" }}
           className="container text-center"
           id="button-bank"
         >
           <ControlBtn
-            css={startBtnStyle}
+            css={ctrlBtnStyle}
             className="btn btn-lg"
             text="Start"
             onClick={this.startOnClick}
           />
           <ControlBtn
-            css={stopBtnStyle}
+            css={ctrlBtnStyle}
             className="btn btn-lg"
             text="Stop"
             onClick={this.stopOnClick}
           />
+          <ControlBtn
+            css={resetBtnStyle}
+            className="btn btn-lg"
+            text="Reset"
+            onClick={this.resetOnClick}
+          />
+        </div>
+
+        <div
+          id="data-bank"
+          className="container text-center"
+          style={{ margin: "10px auto" }}
+        >
+          <div className="row" style={{ margin: "10px auto" }}>
+            <DataDisplay
+              data={this.state.halfLifeInMs / 1000 + " sec."}
+              title={"Half-life"}
+            />
+            <DataDisplay
+              data={this.state.halfLifeCount}
+              title={"Half-lives Elapsed"}
+            />
+            <DataDisplay
+              data={this.state.timeElapsed / 1000 + " sec."}
+              title={"Time Elapsed"}
+            />
+            <DataDisplay data={this.state.atomCount} title={"Atoms Left"} />
+          </div>
         </div>
         <AtomBuilder atomArr={this.state.atomArr} />
       </Layout>
