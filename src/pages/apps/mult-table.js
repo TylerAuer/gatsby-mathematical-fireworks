@@ -6,8 +6,6 @@ import InputField from "../../components/inputField"
 import ControlBtn from "../../components/control-btn"
 import { prettyNum } from "../../components/numFormatter"
 
-// TODO: Create customization controls (randomize, order, largest factor), hide products
-
 const clearBtnStyle = css`
   margin: 3px 2px;
   font-family: "Bungee", cursive;
