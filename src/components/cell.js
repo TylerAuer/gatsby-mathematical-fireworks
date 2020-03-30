@@ -10,8 +10,9 @@ const defaultCellStyle = css`
   vertical-align: center;
   font-size: 20px;
   padding: 7px;
+  transition-duration: 200ms;
   &:hover {
-    background-color: rgba(255, 0, 141, 0.33);
+    background: rgba(255, 0, 141, 0.33);
     cursor: pointer;
   }
 `
@@ -21,17 +22,16 @@ const defaultCellStyle = css`
  */
 const shadedStyle = css`
   background-color: rgba(255, 0, 141, 1);
-  border: solid 1px rgba(255, 0, 141, 1);
+  border: solid 1px white;
   color: white;
-  border: none;
   text-align: center;
   vertical-align: center;
   font-size: 20px;
   padding: 7px;
+  transition-duration: 200ms;
   &:hover {
-    background-color: rgba(255, 0, 141, 1);
+    background: rgba(255, 0, 141, 0.75);
     color: white;
-    font-weight: bolder;
     cursor: pointer;
   }
 `
