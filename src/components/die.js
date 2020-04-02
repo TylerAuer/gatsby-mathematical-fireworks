@@ -1,6 +1,7 @@
 import React from "react"
 import { css } from "@emotion/core"
 
+// TODO: Replace values with SVG of die pips
 const Die = props => {
   return (
     <div
