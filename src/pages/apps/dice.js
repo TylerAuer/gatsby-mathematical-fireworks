@@ -67,6 +67,7 @@ class DiceApp extends React.Component {
     this.state = {
       iterations: 0,
       diceCount: 2,
+      lastRoll: ["?", "?"],
     }
   }
 
@@ -75,18 +76,25 @@ class DiceApp extends React.Component {
   }
 
   diceCountOnChange(e) {
-    let newDiceCount = e.target.value
+    let newDiceCount = parseInt(e.target.value)
+    const maxDiceCount = 20
     if (newDiceCount < 1) {
       newDiceCount = 1
-    } else if (newDiceCount > 10) {
-      newDiceCount = 10
+    } else if (newDiceCount > maxDiceCount) {
+      newDiceCount = maxDiceCount
     }
     this.setState({
       diceCount: newDiceCount,
+      lastRoll: new Array(newDiceCount).fill("?"),
     })
   }
 
   render() {
+    let diceList = []
+    for (let dieVal of this.state.lastRoll) {
+      diceList.push(<Die value={dieVal} />)
+    }
+
     return (
       <Layout>
         <AppIntro introHTML={intro} />
@@ -100,17 +108,14 @@ class DiceApp extends React.Component {
               name="diceNum"
               value={this.state.diceCount}
               onChange={this.diceCountOnChange}
-              min="1"
-              max="10"
             />
           </div>
         </div>
-        <div id="dice-bin" className="container d-flex justify-content-center">
-          <Die value="6" />
-          <Die value="6" />
-          <Die value="6" />
-          <Die value="6" />
-          <Die value="6" />
+        <div
+          id="dice-bin"
+          className="container d-flex flex-wrap justify-content-center"
+        >
+          {diceList}
         </div>
         <div id="stats-bin"></div>
       </Layout>
