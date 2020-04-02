@@ -1,6 +1,8 @@
 import React from "react"
 import { css } from "@emotion/core"
 
+// TODO: Add smooth animation
+
 const showHideBtnStyle = css`
   background: rgba(255, 0, 141, 1);
   color: white;
