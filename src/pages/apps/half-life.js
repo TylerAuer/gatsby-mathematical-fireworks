@@ -1,6 +1,7 @@
 import React from "react"
 import { css } from "@emotion/core"
 import Layout from "../../components/layout"
+import AppIntro from "../../components/intro"
 import ControlBtn from "../../components/control-btn"
 import { prettyNum } from "../../components/numFormatter"
 
@@ -116,6 +117,43 @@ const rangeFormStyle = css`
     background: #ff008d;
   }
 `
+
+const intro = (
+  <>
+    <p>
+      There are <span id="dots-on-page">5000</span> atoms (pink dots) on this
+      page. When you hit the start button, they will begin to turn white,
+      randomly. This is meant to simulate a phenomenon known as{" "}
+      <a href="https://en.wikipedia.org/wiki/Radioactive_decay">
+        radioactive decay
+      </a>
+      .
+    </p>
+    <p>
+      It is impossible to predict how long it will take an individual atom to
+      decay in the same way that it is impossible to know for sure if a coin
+      will land on heads or tails. But, since there are <b>so</b> many atoms, we
+      can make predictions about what the pattern will look like. The amount of
+      atoms that remain radioactive follows an{" "}
+      <a href="https://www.desmos.com/calculator/y4kpct1jkq">
+        exponential curve
+      </a>
+      . You often learn about exponential equations in an Algebra 1 course.
+    </p>
+    <p>
+      The <b>rate of decay</b> of a material is described with something called{" "}
+      <b>half-life</b>. The half-life of a material is how long it takes, on
+      average, for half of the atoms in the material to decay. Not all materials
+      decay, only matter with unstable atoms.
+    </p>
+    <p>
+      Some materials have a very long half-life, while others are very short.{" "}
+      <b>Uranium-235</b>, an isotope often used in nuclear weapons, has a
+      half-life of 703,800,000 <b>years</b>! While Boron-19 has a half-life of
+      only 0.00292 <b>seconds</b>.
+    </p>
+  </>
+)
 
 const DataDisplay = props => {
   return (
@@ -316,42 +354,10 @@ class HalfLifeApp extends React.Component {
   render() {
     return (
       <Layout>
+        <AppIntro introHTML={intro} />
         <div id="preface" className="container">
-          <p>
-            There are <span id="dots-on-page">5000</span> atoms (pink dots) on
-            this page. When you hit the start button, they will begin to turn
-            white, randomly. This is meant to simulate a phenomenon known as{" "}
-            <a href="https://en.wikipedia.org/wiki/Radioactive_decay">
-              radioactive decay
-            </a>
-            .
-          </p>
-          <p>
-            It is impossible to predict how long it will take an individual atom
-            to decay in the same way that it is impossible to know for sure if a
-            coin will land on heads or tails. But, since there are <b>so</b>{" "}
-            many atoms, we can make predictions about what the pattern will look
-            like. The amount of atoms that remain radioactive follows an{" "}
-            <a href="https://www.desmos.com/calculator/y4kpct1jkq">
-              exponential curve
-            </a>
-            . You often learn about exponential equations in an Algebra 1
-            course.
-          </p>
-          <p>
-            The <b>rate of decay</b> of a material is described with something
-            called <b>half-life</b>. The half-life of a material is how long it
-            takes, on average, for half of the atoms in the material to decay.
-            Not all materials decay, only matter with unstable atoms.
-          </p>
-          <p>
-            Some materials have a very long half-life, while others are very
-            short. <b>Uranium-235</b>, an isotope often used in nuclear weapons,
-            has a half-life of 703,800,000 <b>years</b>! While Boron-19 has a
-            half-life of only 0.00292 <b>seconds</b>.
-          </p>
           <form>
-            <div className="form-group" style={{ margin: "0px" }}>
+            <div className="form-group" style={{ margin: "20px auto" }}>
               <label>
                 You can adjust the <b>half-life</b> of the atoms in this
                 simulation using this slider:
