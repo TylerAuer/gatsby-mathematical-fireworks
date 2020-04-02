@@ -23,9 +23,9 @@ const IndexPage = () => (
       </div>
       <div className="row">
         <Card
-          title="Monte Carlo"
-          desc="Run random events over and over and over and over..."
-          btnUrl="/apps/monte-carlo"
+          title="Dice"
+          desc="Watch The Law of Large Numbers exert its influence on the data as the computer simulates thousands of dice rolls."
+          btnUrl="/apps/dice"
           btnText="I, too, like to live dangerously."
         />
         <Card
