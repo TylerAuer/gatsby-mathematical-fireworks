@@ -4,6 +4,7 @@ import Layout from "../../components/layout"
 import AppIntro from "../../components/intro"
 import ControlBtn from "../../components/control-btn"
 import { prettyNum } from "../../components/numFormatter"
+import DataDisplay from "../../components/dataDisplay"
 
 const ctrlBtnStyle = css`
   margin: 3px 2px;
@@ -154,21 +155,6 @@ const intro = (
     </p>
   </>
 )
-
-const DataDisplay = props => {
-  return (
-    <div className="col-6 col-md-3">
-      <h3>{props.data}</h3>
-      <h5
-        css={css`
-          color: rgb(255, 116, 81);
-        `}
-      >
-        {props.title}
-      </h5>
-    </div>
-  )
-}
 
 // TODO: Make live atoms vibrate and then go still and gray when dead
 // Use a parent div to ensure they hold their size and position
