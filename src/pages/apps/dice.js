@@ -90,7 +90,7 @@ class DiceApp extends React.Component {
     this.chartReference = React.createRef()
     this.diceCountOnChange = this.diceCountOnChange.bind(this)
     this.startOnClick = this.startOnClick.bind(this)
-    this.stopOnClick = this.stopOnClick.bind(this)
+    this.stop = this.stop.bind(this)
     this.resetOnClick = this.resetOnClick.bind(this)
     this.state = {
       iterations: 0,
@@ -176,10 +176,6 @@ class DiceApp extends React.Component {
     clearInterval(this.simHandle)
   }
 
-  stopOnClick(e) {
-    this.stop()
-  }
-
   resetOnClick(e) {
     this.stop()
     this.setState({
@@ -242,7 +238,7 @@ class DiceApp extends React.Component {
               css={ctrlBtnStyle}
               className="btn btn-lg"
               text="Stop"
-              onClick={this.stopOnClick}
+              onClick={this.stop}
             />
           </div>
           <ControlBtn
