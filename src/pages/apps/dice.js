@@ -6,7 +6,11 @@ import Die from "../../components/die"
 import DataDisplay from "../../components/dataDisplay"
 import ControlBtn from "../../components/control-btn"
 import { css } from "@emotion/core"
-// import { Bar } from "react-chartjs-2"
+import BarChart from "../../components/barChart"
+import { defaults } from "react-chartjs-2"
+
+// Disable animating charts by default.
+defaults.global.animation = false
 
 const ctrlBtnStyle = css`
   margin: 3px 2px;
@@ -87,7 +91,7 @@ const intro = (
 class DiceApp extends React.Component {
   constructor(props) {
     super(props)
-    this.chartReference = React.createRef()
+    this.barChart = React.createRef()
     this.diceCountOnChange = this.diceCountOnChange.bind(this)
     this.startOnClick = this.startOnClick.bind(this)
     this.stop = this.stop.bind(this)
@@ -96,13 +100,14 @@ class DiceApp extends React.Component {
       iterations: 0,
       diceCount: 2,
       lastRoll: ["?", "?"],
-      resultCounts: new Array(11).fill(0), // counts of each sum
+      resultCounts: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      // resultCounts: new Array(11).fill(0), // counts of each sum
       avgSumHist: [], // average over time
     }
   }
 
   componentDidMount() {
-    console.log(this.chartReference) // returns a Chart.js instance reference
+    console.log(this.barChart.current)
   }
 
   diceCountOnChange(e) {
@@ -151,11 +156,6 @@ class DiceApp extends React.Component {
     let newAvgSumHist = this.state.avgSumHist
     newAvgSumHist.push(newAvg)
 
-    console.log("------------------")
-    console.log("Roll:", newLastRoll)
-    console.log("Sum:", sumOfLastRoll)
-    console.log("Counts:", newResultCounts)
-    console.log("AVG:", newAvg)
     this.setState(state => {
       return {
         iterations: state.iterations + 1,
@@ -179,7 +179,6 @@ class DiceApp extends React.Component {
   resetOnClick(e) {
     this.stop()
     this.setState({
-      isSimRunning: false,
       iterations: 0,
       lastRoll: new Array(this.state.diceCount).fill("?"),
       resultCounts: new Array(5 * this.state.diceCount + 1).fill(0),
@@ -199,6 +198,52 @@ class DiceApp extends React.Component {
         Math.round(
           this.state.avgSumHist[this.state.avgSumHist.length - 1] * 1000
         ) / 1000
+    }
+
+    let barLabels = []
+    for (let i = this.state.diceCount; i <= this.state.diceCount * 6; i++) {
+      barLabels.push(i)
+    }
+
+    const countData = this.state.resultCounts
+    console.log(countData)
+
+    const data = {
+      labels: barLabels,
+      datasets: [
+        {
+          label: "Counts of Roll Sums",
+          data: countData,
+          backgroundColor: "rgba(255, 0, 141, 1)", // $theme-pink
+          borderColor: "rgba(20, 186, 204, 1)", // $theme-blue
+          borderWidth: 3,
+          hoverBackgroundColor: "rgba(255,99,132,1)",
+          hoverBorderColor: "rgba(255,99,132,1)",
+        },
+      ],
+      options: {
+        responsive: true,
+        legend: false,
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true,
+                fontColor: "rgba(255, 0, 141, 1)", // $theme-pink
+                fontFamily: "Bungee, cursive", // $hFont
+              },
+            },
+          ],
+          xAxes: [
+            {
+              ticks: {
+                fontColor: "rgba(255, 0, 141, 1)", // $theme-pink
+                fontFamily: "Bungee, cursive", // $hFont
+              },
+            },
+          ],
+        },
+      },
     }
 
     return (
@@ -226,6 +271,7 @@ class DiceApp extends React.Component {
         >
           {diceList}
         </div>
+
         <div id="control-btns" className="container text-center">
           <div className="btn-group">
             <ControlBtn
@@ -246,6 +292,19 @@ class DiceApp extends React.Component {
             className="btn btn-lg"
             text="Reset"
             onClick={this.resetOnClick}
+          />
+        </div>
+
+        <div className="container">
+          <BarChart
+            key={this.state.iterations}
+            ref={this.barChart}
+            data={data}
+            width={1000}
+            height={400}
+            options={{
+              maintainAspectRatio: false,
+            }}
           />
         </div>
       </Layout>
