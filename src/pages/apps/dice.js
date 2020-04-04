@@ -217,6 +217,10 @@ class DiceApp extends React.Component {
     const countData = this.state.resultCounts
     console.log(countData)
 
+    // TODO: add conditional render based on iterations
+    // if iterations are at 0, display centered text that says "Bar Chart of Roll Sums"
+    // else: Graph it
+
     return (
       <Layout>
         <AppIntro introHTML={intro} />
@@ -266,7 +270,10 @@ class DiceApp extends React.Component {
           />
         </div>
 
-        <CountsBarChart data={this.state.resultCounts} />
+        <CountsBarChart
+          data={this.state.resultCounts}
+          hasData={this.state.iterations}
+        />
       </Layout>
     )
   }
