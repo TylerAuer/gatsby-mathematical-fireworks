@@ -96,19 +96,31 @@ class DiceApp extends React.Component {
       iterations: 0,
       diceCount: 2,
       lastRoll: ["?", "?"],
-      resultCounts: new Array(11).fill(0), // counts of each sum
       avgSumHist: [], // average over time
+      resultCounts: this.genEmptyDiceCountDictArr(2),
     }
   }
 
   componentDidMount() {
-    console.log(this.barChart.current)
+    console.log(this.state.resultCounts)
+  }
+
+  genEmptyDiceCountDictArr(diceCount) {
+    let newResultCount = []
+    for (let i = diceCount; i <= 6 * diceCount; i++) {
+      newResultCount.push({
+        id: i.toString(),
+        value: 0,
+      })
+    }
+    return newResultCount
   }
 
   diceCountOnChange(e) {
     this.stop()
-    let newDiceCount = parseInt(e.target.value)
     const maxDiceCount = 20
+
+    let newDiceCount = parseInt(e.target.value)
     if (newDiceCount < 1) {
       newDiceCount = 1
     } else if (newDiceCount > maxDiceCount) {
@@ -117,7 +129,7 @@ class DiceApp extends React.Component {
     this.setState({
       diceCount: newDiceCount,
       lastRoll: new Array(newDiceCount).fill("?"),
-      resultCounts: new Array(5 * newDiceCount + 1).fill(0),
+      resultCounts: this.genEmptyDiceCountDictArr(newDiceCount),
       avgSumHist: [],
     })
   }
@@ -138,7 +150,8 @@ class DiceApp extends React.Component {
     })
 
     let newResultCounts = this.state.resultCounts
-    newResultCounts[sumOfLastRoll - this.state.diceCount] += 1 // must go back diceCount because 0-index and smallest value = diceCount
+    //newResultCounts[sumOfLastRoll - this.state.diceCount] += 1 // must go back diceCount because 0-index and smallest value = diceCount
+    newResultCounts[sumOfLastRoll - this.state.diceCount].value += 1
 
     let newAvg
     if (this.state.avgSumHist.length) {
@@ -162,6 +175,7 @@ class DiceApp extends React.Component {
   }
 
   startOnClick(e) {
+    this.stop()
     this.simHandle = setInterval(() => {
       this.runSim()
     }, 1)
@@ -176,7 +190,7 @@ class DiceApp extends React.Component {
     this.setState({
       iterations: 0,
       lastRoll: new Array(this.state.diceCount).fill("?"),
-      resultCounts: new Array(5 * this.state.diceCount + 1).fill(0),
+      resultCounts: this.genEmptyDiceCountDictArr(this.state.diceCount),
       avgSumHist: [],
     })
   }
@@ -202,21 +216,6 @@ class DiceApp extends React.Component {
 
     const countData = this.state.resultCounts
     console.log(countData)
-
-    const data = {
-      labels: barLabels,
-      datasets: [
-        {
-          label: "Counts of Roll Sums",
-          data: countData,
-          backgroundColor: "rgba(255, 0, 141, 1)", // $theme-pink
-          borderColor: "rgba(20, 186, 204, 1)", // $theme-blue
-          borderWidth: 3,
-          hoverBackgroundColor: "rgba(255,99,132,1)",
-          hoverBorderColor: "rgba(255,99,132,1)",
-        },
-      ],
-    }
 
     return (
       <Layout>
@@ -267,7 +266,7 @@ class DiceApp extends React.Component {
           />
         </div>
 
-        <CountsBarChart />
+        <CountsBarChart data={this.state.resultCounts} />
       </Layout>
     )
   }
