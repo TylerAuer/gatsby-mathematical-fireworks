@@ -6,11 +6,7 @@ import Die from "../../components/die"
 import DataDisplay from "../../components/dataDisplay"
 import ControlBtn from "../../components/control-btn"
 import { css } from "@emotion/core"
-import BarChart from "../../components/barChart"
-import { defaults } from "react-chartjs-2"
-
-// Disable animating charts by default.
-defaults.global.animation = false
+import CountsBarChart from "../../components/countsBarChart"
 
 const ctrlBtnStyle = css`
   margin: 3px 2px;
@@ -271,36 +267,7 @@ class DiceApp extends React.Component {
           />
         </div>
 
-        <div className="container-fluid">
-          <BarChart
-            key={this.state.iterations}
-            data={data}
-            options={{
-              aspectRatio: 2,
-              responsive: true,
-              legend: false,
-              scales: {
-                yAxes: [
-                  {
-                    ticks: {
-                      beginAtZero: true,
-                      fontColor: "rgba(255, 0, 141, 1)", // $theme-pink
-                      fontFamily: "Bungee, cursive", // $hFont
-                    },
-                  },
-                ],
-                xAxes: [
-                  {
-                    ticks: {
-                      fontColor: "rgba(255, 0, 141, 1)", // $theme-pink
-                      fontFamily: "Bungee, cursive", // $hFont
-                    },
-                  },
-                ],
-              },
-            }}
-          />
-        </div>
+        <CountsBarChart />
       </Layout>
     )
   }
