@@ -100,8 +100,7 @@ class DiceApp extends React.Component {
       iterations: 0,
       diceCount: 2,
       lastRoll: ["?", "?"],
-      resultCounts: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      // resultCounts: new Array(11).fill(0), // counts of each sum
+      resultCounts: new Array(11).fill(0), // counts of each sum
       avgSumHist: [], // average over time
     }
   }
@@ -221,29 +220,6 @@ class DiceApp extends React.Component {
           hoverBorderColor: "rgba(255,99,132,1)",
         },
       ],
-      options: {
-        responsive: true,
-        legend: false,
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-                fontColor: "rgba(255, 0, 141, 1)", // $theme-pink
-                fontFamily: "Bungee, cursive", // $hFont
-              },
-            },
-          ],
-          xAxes: [
-            {
-              ticks: {
-                fontColor: "rgba(255, 0, 141, 1)", // $theme-pink
-                fontFamily: "Bungee, cursive", // $hFont
-              },
-            },
-          ],
-        },
-      },
     }
 
     return (
@@ -295,15 +271,33 @@ class DiceApp extends React.Component {
           />
         </div>
 
-        <div className="container">
+        <div className="container-fluid">
           <BarChart
             key={this.state.iterations}
-            ref={this.barChart}
             data={data}
-            width={1000}
-            height={400}
             options={{
-              maintainAspectRatio: false,
+              aspectRatio: 2,
+              responsive: true,
+              legend: false,
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true,
+                      fontColor: "rgba(255, 0, 141, 1)", // $theme-pink
+                      fontFamily: "Bungee, cursive", // $hFont
+                    },
+                  },
+                ],
+                xAxes: [
+                  {
+                    ticks: {
+                      fontColor: "rgba(255, 0, 141, 1)", // $theme-pink
+                      fontFamily: "Bungee, cursive", // $hFont
+                    },
+                  },
+                ],
+              },
             }}
           />
         </div>

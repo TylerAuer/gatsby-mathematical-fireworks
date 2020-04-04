@@ -6,6 +6,7 @@ class BarChart extends Component {
     super(props)
     this.state = {
       chartData: this.props.data,
+      options: this.props.options,
     }
   }
 
@@ -15,20 +16,7 @@ class BarChart extends Component {
   }
 
   render() {
-    return (
-      <Bar
-        data={this.state.chartData}
-        options={{
-          title: {
-            display: this.props.displayTitle,
-            fontSize: 25,
-          },
-          legend: {
-            display: this.props.displayLegend,
-          },
-        }}
-      />
-    )
+    return <Bar data={this.state.chartData} options={this.state.options} />
   }
 }
 
