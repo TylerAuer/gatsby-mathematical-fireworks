@@ -247,7 +247,11 @@ class DiceApp extends React.Component {
           {diceList}
         </div>
 
-        <div id="control-btns" className="container text-center">
+        <div
+          id="control-btns"
+          className="container text-center"
+          style={{ margin: "10px auto" }}
+        >
           <div className="btn-group">
             <ControlBtn
               css={ctrlBtnStyle}
