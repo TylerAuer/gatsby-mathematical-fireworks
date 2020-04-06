@@ -7,8 +7,17 @@ import { css } from "@emotion/core"
 function InputField(props) {
   return (
     <div className="text-center">
-      <label htmlFor="start" css={css``}>
-        <h3>{props.title}</h3>
+      <label htmlFor="start">
+        <div
+          css={css`
+            color: rgba(20, 186, 204, 1);
+            font-family: "Bungee", cursive;
+            font-size: 25px;
+            line-height: 1;
+          `}
+        >
+          {props.title}
+        </div>
       </label>
       <input
         id={props.name}
