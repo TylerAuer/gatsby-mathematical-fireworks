@@ -23,6 +23,7 @@ const DataDisplay = props => {
           font-size: 1.25rem;
           font-family: "Bungee", cursive;
           line-height: 1;
+          margin-bottom: 10px;
         `}
       >
         {props.title}
