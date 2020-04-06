@@ -8,8 +8,8 @@ const inputStyle = css`
   border: 2px solid rgb(255, 0, 141);
   border-radius: 40px;
   font-family: "Bungee", cursive;
-  font-size: 20px;
-  padding-left: 25px;
+  font-size: 30px;
+  padding-left: 30px;
   margin: 0px auto 15px auto;
   &:hover {
     border-width: 3px;
