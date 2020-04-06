@@ -7,6 +7,7 @@ import DataDisplay from "../../components/dataDisplay"
 import ControlBtn from "../../components/control-btn"
 import { css } from "@emotion/core"
 import CountsBarChart from "../../components/countsBarChart"
+import AvgLineChart from "../../components/avgLineChart"
 
 const ctrlBtnStyle = css`
   margin: 3px 2px;
@@ -96,13 +97,15 @@ class DiceApp extends React.Component {
       iterations: 0,
       diceCount: 2,
       lastRoll: ["?", "?"],
-      avgSumHist: [], // average over time
+      avgSumHist: [
+        {
+          id: "Rolling Average",
+          color: "rgba(255, 0, 141, 1)",
+          data: [],
+        },
+      ],
       resultCounts: this.genEmptyDiceCountDictArr(2),
     }
-  }
-
-  componentDidMount() {
-    console.log(this.state.resultCounts)
   }
 
   genEmptyDiceCountDictArr(diceCount) {
@@ -129,8 +132,15 @@ class DiceApp extends React.Component {
     this.setState({
       diceCount: newDiceCount,
       lastRoll: new Array(newDiceCount).fill("?"),
+      lastAvg: 0,
       resultCounts: this.genEmptyDiceCountDictArr(newDiceCount),
-      avgSumHist: [],
+      avgSumHist: [
+        {
+          id: "Rolling Average",
+          color: "rgba(255, 0, 141, 1)",
+          data: [],
+        },
+      ],
     })
   }
 
@@ -150,21 +160,26 @@ class DiceApp extends React.Component {
     })
 
     let newResultCounts = this.state.resultCounts
-    //newResultCounts[sumOfLastRoll - this.state.diceCount] += 1 // must go back diceCount because 0-index and smallest value = diceCount
     newResultCounts[sumOfLastRoll - this.state.diceCount].value += 1
 
-    let newAvg
-    if (this.state.avgSumHist.length) {
+    let newAvg = sumOfLastRoll
+    if (this.state.iterations) {
       newAvg =
-        (this.state.avgSumHist[this.state.avgSumHist.length - 1] *
+        (this.state.avgSumHist[0].data[this.state.avgSumHist[0].data.length - 1]
+          .y *
           this.state.iterations +
           sumOfLastRoll) /
         (this.state.iterations + 1)
-    } else newAvg = sumOfLastRoll
-    let newAvgSumHist = this.state.avgSumHist
-    newAvgSumHist.push(newAvg)
+    }
 
     this.setState(state => {
+      const newAvgDict = {
+        x: state.iterations + 1,
+        y: newAvg,
+      }
+      let newAvgSumHist = state.avgSumHist
+      newAvgSumHist[0].data.push(newAvgDict)
+
       return {
         iterations: state.iterations + 1,
         lastRoll: newLastRoll,
@@ -191,7 +206,13 @@ class DiceApp extends React.Component {
       iterations: 0,
       lastRoll: new Array(this.state.diceCount).fill("?"),
       resultCounts: this.genEmptyDiceCountDictArr(this.state.diceCount),
-      avgSumHist: [],
+      avgSumHist: [
+        {
+          id: "Rolling Average",
+          color: "rgba(255, 0, 141, 1)",
+          data: [],
+        },
+      ],
     })
   }
 
@@ -202,10 +223,12 @@ class DiceApp extends React.Component {
     }
 
     let avgDisplay = " - "
-    if (this.state.avgSumHist.length > 0) {
+    if (this.state.avgSumHist[0].data.length > 0) {
       avgDisplay =
         Math.round(
-          this.state.avgSumHist[this.state.avgSumHist.length - 1] * 1000
+          this.state.avgSumHist[0].data[
+            this.state.avgSumHist[0].data.length - 1
+          ].y * 1000
         ) / 1000
     }
 
@@ -215,7 +238,6 @@ class DiceApp extends React.Component {
     }
 
     const countData = this.state.resultCounts
-    console.log(countData)
 
     // TODO: add conditional render based on iterations
     // if iterations are at 0, display centered text that says "Bar Chart of Roll Sums"
@@ -276,6 +298,10 @@ class DiceApp extends React.Component {
 
         <CountsBarChart
           data={this.state.resultCounts}
+          hasData={this.state.iterations}
+        />
+        <AvgLineChart
+          data={this.state.avgSumHist}
           hasData={this.state.iterations}
         />
       </Layout>

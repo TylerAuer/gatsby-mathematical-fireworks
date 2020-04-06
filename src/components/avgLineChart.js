@@ -1,10 +1,10 @@
 import React, { Component } from "react"
-import { ResponsiveBar } from "@nivo/bar"
+import { ResponsiveLine } from "@nivo/line"
 import { chartTheme } from "./chartTheme"
 import { css } from "@emotion/core"
 
 const placeHolderDivStyle = css`
-  height: 450px;
+  height: 250px;
   width: 100%
   margin: 10px;
   position: relative;
@@ -21,7 +21,7 @@ const placeHolderOverlayStyle = css`
   border-radius: 10px;
   z-index: 8;
   /* background: rgba(219, 219, 219, 0.9); */
-  backdrop-filter: blur(15px) grayscale(10%);
+  backdrop-filter: blur(8px) grayscale(10%);
   font-size: 50px;
   font-family: "Bungee", cursive;
   text-shadow: 2px 2px 3px white;
@@ -29,52 +29,77 @@ const placeHolderOverlayStyle = css`
 
 const placeHolderData = [
   {
-    id: "1",
-    value: 5,
-  },
-  {
-    id: "2",
-    value: 10,
-  },
-  {
-    id: "3",
-    value: 15,
-  },
-  {
-    id: "4",
-    value: 10,
-  },
-  {
-    id: "5",
-    value: 5,
+    id: "Rolling Average",
+    color: "rgba(255, 0, 141, 1)",
+    data: [
+      {
+        x: 1,
+        y: 5,
+      },
+      {
+        x: 2,
+        y: 5.1,
+      },
+      {
+        x: 3,
+        y: 5.3,
+      },
+      {
+        x: 4,
+        y: 5.12,
+      },
+      {
+        x: 5,
+        y: 4.7,
+      },
+      {
+        x: 6,
+        y: 5.3,
+      },
+      {
+        x: 7,
+        y: 5.1,
+      },
+      {
+        x: 8,
+        y: 5.9,
+      },
+      {
+        x: 9,
+        y: 5,
+      },
+    ],
   },
 ]
 
-const CountsBarChart = props => {
+const AvgLineChart = props => {
   // use a truthy/falsy value to display warning before data arrives
   if (props.hasData) {
     return (
       <div css={placeHolderDivStyle}>
-        <ResponsiveBar
+        <ResponsiveLine
+          css={placeHolderUnderlayStyle}
           data={props.data}
           theme={chartTheme}
-          minValue={0}
-          margin={{ top: 10, right: 10, bottom: 50, left: 50 }}
+          margin={{ top: 10, right: 10, bottom: 10, left: 40 }}
           colors={"rgba(255, 0, 141, 1)"}
-          padding={0.04}
-          axisBottom={{
-            tickSize: 5,
-            tickPadding: 1,
-            tickRotation: 0,
+          padding={0}
+          enableGridX={false}
+          axisBottom={null}
+          yScale={{
+            type: "linear",
+            min: "auto",
+            max: "auto",
+            stacked: false,
+            reverse: false,
           }}
           axisLeft={{
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
           }}
-          labelSkipWidth={12}
-          labelSkipHeight={20}
-          labelTextColor={"black"}
+          enablePoints={false}
+          curve={"linear"}
           animate={true}
           motionStiffness={90}
           motionDamping={15}
@@ -85,27 +110,29 @@ const CountsBarChart = props => {
     return (
       <>
         <div css={placeHolderDivStyle}>
-          <ResponsiveBar
+          <ResponsiveLine
             css={placeHolderUnderlayStyle}
             data={placeHolderData}
             theme={chartTheme}
-            minValue={0}
-            margin={{ top: 10, right: 10, bottom: 50, left: 50 }}
+            margin={{ top: 10, right: 10, bottom: 10, left: 40 }}
             colors={"rgba(255, 0, 141, 1)"}
-            padding={0.04}
-            axisBottom={{
-              tickSize: 5,
-              tickPadding: 1,
-              tickRotation: 0,
+            padding={0}
+            enableGridX={false}
+            axisBottom={null}
+            yScale={{
+              type: "linear",
+              min: "auto",
+              max: "auto",
+              stacked: false,
+              reverse: false,
             }}
             axisLeft={{
               tickSize: 5,
               tickPadding: 5,
               tickRotation: 0,
             }}
-            labelSkipWidth={12}
-            labelSkipHeight={20}
-            labelTextColor={"black"}
+            enablePoints={false}
+            curve={"linear"}
             animate={true}
             motionStiffness={90}
             motionDamping={15}
@@ -115,7 +142,7 @@ const CountsBarChart = props => {
             className="d-flex flex-column justify-content-center"
           >
             <p className="text-center align-middle">
-              Hit start and watch the data <i>roll</i> in.
+              I'll track the average result here.
             </p>
           </div>
         </div>
@@ -124,4 +151,4 @@ const CountsBarChart = props => {
   }
 }
 
-export default CountsBarChart
+export default AvgLineChart
