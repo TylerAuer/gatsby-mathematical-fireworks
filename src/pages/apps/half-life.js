@@ -392,10 +392,10 @@ class HalfLifeApp extends React.Component {
 
         <div
           id="data-bank"
-          className="container text-center"
+          className="container"
           style={{ margin: "10px auto" }}
         >
-          <div className="row" style={{ margin: "10px auto" }}>
+          <div className="row">
             <DataDisplay
               data={this.state.halfLifeInMs / 1000 + " sec."}
               title={"Half-life"}
