@@ -1,4 +1,4 @@
-I'm migrating this site to Gatsby to be able to build more interactive pages using React. You can see the [old Jekyll version of the site here](https://github.com/TylerAuer/math-tools).
+I migrated this site to Gatsby to be able to build more interactive pages using React. You can see the [old Jekyll version of the site here](https://github.com/TylerAuer/math-tools).
 
 # Mathematical Playgrounds
 
