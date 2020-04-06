@@ -115,7 +115,7 @@ const CountsBarChart = props => {
             className="d-flex flex-column justify-content-center"
           >
             <p className="text-center align-middle">
-              Hit start and watch the data <i>roll</i> in.
+              Hit start. Watch the data <i>roll</i> in.
             </p>
           </div>
         </div>

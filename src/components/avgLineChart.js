@@ -142,7 +142,7 @@ const AvgLineChart = props => {
             className="d-flex flex-column justify-content-center"
           >
             <p className="text-center align-middle">
-              I'll track the average result here.
+              We'll track the average result here.
             </p>
           </div>
         </div>
