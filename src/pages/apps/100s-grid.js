@@ -264,38 +264,46 @@ class GridApp extends React.Component {
         <div style={{ margin: "10px auto" }} id="settings-bank">
           <form>
             <div className="form-row">
-              <InputField
-                title="Start"
-                name="startNum"
-                value={this.state.startNum}
-                onChange={this.handleChange}
-                min="-100"
-                max="10000"
-              />
-              <InputField
-                title="End"
-                name="endNum"
-                value={this.state.endNum}
-                onChange={this.handleChange}
-                min="1"
-                max="10000"
-              />
-              <InputField
-                title="Skip Size"
-                name="skipSize"
-                value={this.state.skipSize}
-                onChange={this.handleChange}
-                min="1"
-                max="1250"
-              />
-              <InputField
-                title="Columns"
-                name="columns"
-                value={this.state.columns}
-                onChange={this.handleChange}
-                min="1"
-                max="150"
-              />
+              <div className="col-xs-12 col-sm-6 col-md text-center">
+                <InputField
+                  title="Start"
+                  name="startNum"
+                  value={this.state.startNum}
+                  onChange={this.handleChange}
+                  min="-100"
+                  max="10000"
+                />
+              </div>
+              <div className="col-xs-12 col-sm-6 col-md text-center">
+                <InputField
+                  title="End"
+                  name="endNum"
+                  value={this.state.endNum}
+                  onChange={this.handleChange}
+                  min="1"
+                  max="10000"
+                />
+              </div>
+              <div className="col-xs-12 col-sm-6 col-md text-center">
+                <InputField
+                  title="Skip Size"
+                  name="skipSize"
+                  value={this.state.skipSize}
+                  onChange={this.handleChange}
+                  min="1"
+                  max="1250"
+                />
+              </div>
+              <div className="col-xs-12 col-sm-6 col-md text-center">
+                <InputField
+                  title="Columns"
+                  name="columns"
+                  value={this.state.columns}
+                  onChange={this.handleChange}
+                  min="1"
+                  max="150"
+                />
+              </div>
             </div>
           </form>
         </div>

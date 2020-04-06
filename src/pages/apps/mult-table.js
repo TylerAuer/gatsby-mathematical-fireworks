@@ -304,22 +304,26 @@ class MultTableApp extends React.Component {
         <div style={{ margin: "10px auto" }} id="settings-bank">
           <form>
             <div className="form-row">
-              <InputField
-                title="Rows"
-                name="rowCount"
-                value={this.state.rowCount}
-                min="1"
-                max="1000"
-                onChange={this.handleChange}
-              />
-              <InputField
-                title="Columns"
-                name="colCount"
-                value={this.state.colCount}
-                min="1"
-                max="50"
-                onChange={this.handleChange}
-              />
+              <div className="col-xs-12 col-sm-6 col-md text-center">
+                <InputField
+                  title="Rows"
+                  name="rowCount"
+                  value={this.state.rowCount}
+                  min="1"
+                  max="1000"
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="col-xs-12 col-sm-6 col-md text-center">
+                <InputField
+                  title="Columns"
+                  name="colCount"
+                  value={this.state.colCount}
+                  min="1"
+                  max="50"
+                  onChange={this.handleChange}
+                />
+              </div>
             </div>
           </form>
         </div>

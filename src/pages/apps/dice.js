@@ -247,19 +247,25 @@ class DiceApp extends React.Component {
       <Layout>
         <AppIntro introHTML={intro} />
 
-        <div className="container d-flex justify-content-around text-center">
-          <DataDisplay title="Iterations" data={this.state.iterations} />
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-xs-6 col-md-3">
+              <DataDisplay title="Iterations" data={this.state.iterations} />
+            </div>
 
-          <div id="settings-bin">
-            <InputField
-              title="Number of Dice"
-              name="diceNum"
-              value={this.state.diceCount}
-              onChange={this.diceCountOnChange}
-            />
+            <div className="col-xs-6 col-md-3 order-md-3">
+              <DataDisplay title="Average Sum" data={avgDisplay} />
+            </div>
+
+            <div className="col-xs-12 col-md-6 order-md-2">
+              <InputField
+                title="Number of Dice"
+                name="diceNum"
+                value={this.state.diceCount}
+                onChange={this.diceCountOnChange}
+              />
+            </div>
           </div>
-
-          <DataDisplay title="Average Sum" data={avgDisplay} />
         </div>
 
         <div
