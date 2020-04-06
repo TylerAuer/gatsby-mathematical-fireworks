@@ -31,7 +31,7 @@ const Card = props => (
           className="btn btn-block btn-lg"
           href={props.btnUrl}
           css={css`
-            background-color: rgba(255, 0, 141, 0.85);
+            background-color: rgba(255, 0, 141, 0.75);
             color: white;
             /* font-family: "Bungee", cursive; */
             font-size: 15px;
@@ -41,7 +41,7 @@ const Card = props => (
             transition: width ease-in-out 500ms;
             &:hover {
               color: white;
-              background-color: rgb(255, 116, 81);
+              background-color: rgba(255, 0, 141, 1);
               width: 95%;
             }
           `}
