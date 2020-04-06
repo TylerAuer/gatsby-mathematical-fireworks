@@ -198,6 +198,7 @@ const AtomBuilder = props => {
           border-radius: 10px;
           padding: 5px;
           min-height: 400px;
+          margin-bottom: 50px;
         `}
       >
         {atoms}
@@ -364,7 +365,7 @@ class HalfLifeApp extends React.Component {
         </div>
 
         <div
-          style={{ margin: "10px auto" }}
+          style={{ margin: "0px auto 10px auto" }}
           className="container text-center"
           id="button-bank"
         >
@@ -393,7 +394,7 @@ class HalfLifeApp extends React.Component {
         <div
           id="data-bank"
           className="container"
-          style={{ margin: "10px auto" }}
+          style={{ margin: "20px auto" }}
         >
           <div className="row">
             <DataDisplay
