@@ -131,6 +131,7 @@ class DiceApp extends React.Component {
       diceCount: newDiceCount,
       lastRoll: new Array(newDiceCount).fill("?"),
       lastAvg: 0,
+      iterations: 0,
       resultCounts: this.genEmptyDiceCountDictArr(newDiceCount),
       avgSumHist: [
         {
