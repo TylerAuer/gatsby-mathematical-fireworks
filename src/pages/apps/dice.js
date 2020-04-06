@@ -36,19 +36,16 @@ const resetBtnStyle = css`
 const intro = (
   <>
     <p>
-      Humans have been playing games with dice for{" "}
-      <a href="https://en.wikipedia.org/wiki/Dice">over 4000 years</a> because
-      they add an element of chance and randomness. There are nearly{" "}
+      <b>Dice</b> are really just simple <b>random number</b> generators. And,
+      humans have been using dice to add randomness to games for{" "}
+      <a href="https://en.wikipedia.org/wiki/Dice">over 4000 years</a>. There
+      are nearly{" "}
       <a href="https://www.boardgamegeek.com/boardgamemechanic/2072/dice-rolling/linkeditems/boardgamemechanic?pageid=1&sort=rank">
         30,000 different board games
       </a>{" "}
-      that use dice in some way. Casinos use them, too, for many of their
-      gambling games like craps.
-    </p>
-    <p>
-      It may seem like mathematicians would not be able to study dice because
-      they are random, but we actually can! It just took us a long time to
-      figure out how.
+      that use dice in some way. It may seem like mathematicians would not be
+      able to study dice because they are random, but we actually can! It just
+      took us a long time to figure out how.
     </p>
     <p>
       <a href="https://en.wikipedia.org/wiki/Al-Kindi">Al-Kindi</a>, an Arab
@@ -66,10 +63,11 @@ const intro = (
     </p>
     <p>
       While it might take you 5 seconds to roll a die and record the results,
-      most computers can simulate thousands of rolls every second. With a
-      computer, mathematicians can look for hidden patterns in random data.
-      These patterns often don't appear until you've collected thousands and
-      thousands of data.
+      most computers can simulate thousands of rolls every second--yours will
+      seem slower because it also has to render all these fancy-schmancy
+      graphics. With a computer, mathematicians can look for hidden patterns in
+      random data. These patterns often don't appear until you've collected
+      thousands and thousands of data.
     </p>
     <p>
       Scientists and mathematicians use this method to predict the outcome of
@@ -236,12 +234,6 @@ class DiceApp extends React.Component {
     for (let i = this.state.diceCount; i <= this.state.diceCount * 6; i++) {
       barLabels.push(i)
     }
-
-    const countData = this.state.resultCounts
-
-    // TODO: add conditional render based on iterations
-    // if iterations are at 0, display centered text that says "Bar Chart of Roll Sums"
-    // else: Graph it
 
     return (
       <Layout>
