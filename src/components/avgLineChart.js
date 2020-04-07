@@ -72,6 +72,9 @@ const placeHolderData = [
   },
 ]
 
+// TODO: Make if statement apply only to the data, not to the whole chart
+// that way the settings for the chart are not repeated
+
 const AvgLineChart = props => {
   // use a truthy/falsy value to display warning before data arrives
   if (props.hasData) {
