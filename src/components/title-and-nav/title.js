@@ -3,7 +3,7 @@ import { css } from "@emotion/core"
 
 const titleStyle = css`
   margin-bottom: 0px;
-  font-size: 50px;
+  font-size: 38px;
   text-transform: uppercase;
   line-height: 1.1;
   @media (min-width: 576px) {
