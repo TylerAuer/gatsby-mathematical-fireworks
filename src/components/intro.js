@@ -6,7 +6,7 @@ import { css } from "@emotion/core"
 const showHideBtnStyle = css`
   background: rgba(255, 0, 141, 1);
   color: white;
-  font-family: "Bungee", cursive;
+  font-family: "Fredoka One", sans-serif;
   &:hover {
     color: white;
     background: rgb(236, 0, 141);

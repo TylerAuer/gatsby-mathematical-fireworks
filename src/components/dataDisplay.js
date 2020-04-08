@@ -8,7 +8,7 @@ const DataDisplay = props => {
         css={css`
           text-align: center !important;
           font-size: 1.75rem;
-          font-family: "Bungee", cursive;
+          font-family: "Fredoka One", sans-serif;
           color: rgba(20, 186, 204, 1);
           line-height: 1;
         `}
@@ -21,7 +21,7 @@ const DataDisplay = props => {
           color: rgb(255, 116, 81);
           text-align: center;
           font-size: 1.25rem;
-          font-family: "Bungee", cursive;
+          font-family: "Fredoka One", sans-serif;
           line-height: 1;
           margin-bottom: 10px;
         `}

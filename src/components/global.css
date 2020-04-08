@@ -2,11 +2,14 @@
 @import url("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css");
 
 /* 
-$theme-pink: rgba(255, 0, 141, 1);
-$theme-blue: rgba(20, 186, 204, 1);
-$theme-yellow: rgb(255, 230, 0);
-$theme-green: rgb(92, 221, 41);
-$theme-red: rgb(255, 116, 81);
+THEME COLORS REFERENCE
+
+rgba(255, 0, 141, 1)   Pink
+rgba(20, 186, 204, 1)  Blue
+rgba(255, 230, 0, 1)   Yellow
+rgba(92, 221, 41, 1)   Green
+rgba(255, 116, 81, 1)  Red/Orange
+
 */
 
 html {
@@ -29,7 +32,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Bungee", cursive;
+  font-family: "Fredoka One", sans-serif;
   color: rgba(20, 186, 204, 1);
 }
 

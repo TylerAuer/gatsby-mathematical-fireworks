@@ -33,9 +33,8 @@ const Card = props => (
           css={css`
             background-color: rgba(255, 0, 141, 0.75);
             color: white;
-            /* font-family: "Bungee", cursive; */
+            font-family: "Fredoka One", sans-serif;
             font-size: 15px;
-            font-weight: bolder;
             margin: 0px auto 10px auto;
             width: 90%;
             transition: width ease-in-out 500ms;

@@ -24,7 +24,7 @@ const skipCountBtnStyle = css`
   height: 48px;
   width: 48px;
   font-size: 20px;
-  font-family: "Bungee", cursive;
+  font-family: "Fredoka One", sans-serif;
   &:hover,
   &:focus {
     background-color: rgba(20, 186, 204, 1);
@@ -33,7 +33,7 @@ const skipCountBtnStyle = css`
 
 const clearBtnStyle = css`
   margin: 3px 2px;
-  font-family: "Bungee", cursive;
+  font-family: "Fredoka One", sans-serif;
   background-color: rgb(255, 116, 81);
   color: white;
   &:hover,
@@ -46,7 +46,7 @@ const clearBtnStyle = css`
 
 const resetBtnStyle = css`
   margin: 3px 2px;
-  font-family: "Bungee", cursive;
+  font-family: "Fredoka One", sans-serif;
   background-color: rgba(20, 186, 204, 1);
   color: white;
   &:hover,

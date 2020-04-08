@@ -11,7 +11,7 @@ const Die = props => {
         border-radius: 20px;
         height: 100px;
         width: 100px;
-        font-family: "Bungee", cursive;
+        font-family: "Fredoka One", sans-serif;
         font-size: 45px;
         display: flex;
         justify-content: center;

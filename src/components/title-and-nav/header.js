@@ -7,7 +7,7 @@ const Header = () => (
     <div className="container-fluid">
       <Title text="Mathematical Playgrounds" />
 
-      <div id="nav-links" className="mb-3">
+      <div id="nav-links" className="mb-4">
         <nav className="nav d-flex justify-content-center">
           <NavLink url="/" text="Home" />
           <NavLink url="/about" text="About" />

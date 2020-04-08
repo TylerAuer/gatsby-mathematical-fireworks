@@ -1,4 +1,31 @@
 import React from "react"
+import { css } from "@emotion/core"
+
+const titleStyle = css`
+  margin-bottom: 0px;
+  font-size: 50px;
+  text-transform: uppercase;
+  line-height: 1.1;
+  @media (min-width: 576px) {
+    font-size: 65px;
+  }
+  @media screen and (min-width: 768px) {
+    font-size: 80px;
+  }
+  @media screen and (min-width: 992px) {
+    font-size: 60px;
+  }
+  @media screen and (min-width: 1200px) {
+    font-size: 75px;
+  }
+  @media screen and (min-width: 2000px) {
+    font-size: 120px;
+  }
+`
+
+const letterStyle = css`
+  transition-duration: 1000ms;
+`
 
 const colorCycle = [
   "rgb(255, 230, 0)", // yellow
@@ -43,7 +70,7 @@ class Title extends React.Component {
       }
 
       wrappedLettersText.push(
-        <span key={i} className="title-letter" style={style}>
+        <span key={i} className="title-letter" style={style} css={letterStyle}>
           {title.charAt(i)}
         </span>
       )
@@ -69,7 +96,7 @@ class Title extends React.Component {
     return (
       <div className="row">
         <div id="header-title-div" className="col-12 text-center">
-          <h1 id="header-title" className="display-4">
+          <h1 id="header-title" css={titleStyle}>
             {this.state.text}
           </h1>
         </div>
