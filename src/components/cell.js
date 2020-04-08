@@ -5,12 +5,15 @@ import { css } from "@emotion/core"
  * Style for un-highlighted cells
  */
 const defaultCellStyle = css`
+  font-size: 14px;
   border: solid 1px rgba(255, 0, 141, 0.33);
   text-align: center;
   vertical-align: center;
-  font-size: 20px;
-  padding: 7px;
   transition-duration: 200ms;
+  @media (min-width: 576px) {
+    padding: 7px;
+    font-size: 20px;
+  }
   &:hover {
     background: rgba(255, 0, 141, 0.33);
     cursor: pointer;
@@ -26,9 +29,12 @@ const shadedStyle = css`
   color: white;
   text-align: center;
   vertical-align: center;
-  font-size: 20px;
-  padding: 7px;
+  font-size: 14px;
   transition-duration: 200ms;
+  @media (min-width: 576px) {
+    padding: 7px;
+    font-size: 20px;
+  }
   &:hover {
     background: rgba(255, 0, 141, 0.75);
     color: white;

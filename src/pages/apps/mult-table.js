@@ -59,12 +59,15 @@ const randBtnStyle = css`
 const MultTable = props => {
   // Generate header row, add className to style header cells
   const tableHeaderStyle = css`
-    font-size 22px;
     color: white;
     border: solid 2px white;
     background-color: rgba(255, 0, 141, 0.8);
-    min-width: 50px;
-    min-height: 45px;
+    padding: 5px;
+    @media (min-width: 576px) {
+      font-size: 22px;
+      min-width: 50px;
+      min-height: 45px;
+    }
     &:hover {
       background-color: rgba(255, 0, 141, 1);
       cursor: pointer;
