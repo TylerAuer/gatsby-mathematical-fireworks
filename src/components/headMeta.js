@@ -5,7 +5,6 @@ const HeadMeta = () => (
   <Helmet>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <title>Mathematical Playgrounds</title>
 
     <script
       async

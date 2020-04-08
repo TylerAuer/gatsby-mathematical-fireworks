@@ -5,6 +5,7 @@ import Cell from "../../components/cell"
 import InputField from "../../components/inputField"
 import ControlBtn from "../../components/control-btn"
 import { prettyNum } from "../../components/numFormatter"
+import { Helmet } from "react-helmet"
 
 const clearBtnStyle = css`
   margin: 3px 2px;
@@ -303,81 +304,86 @@ class MultTableApp extends React.Component {
 
   render() {
     return (
-      <Layout>
-        <div style={{ margin: "10px auto" }} id="settings-bank">
-          <form>
-            <div className="form-row">
-              <div className="col-xs-12 col-sm-6 col-md text-center">
-                <InputField
-                  title="Rows"
-                  name="rowCount"
-                  value={this.state.rowCount}
-                  min="1"
-                  max="1000"
-                  onChange={this.handleChange}
-                />
+      <>
+        <Helmet>
+          <title>Multiplication Table - Mathematical Playgrounds</title>
+        </Helmet>
+        <Layout>
+          <div style={{ margin: "10px auto" }} id="settings-bank">
+            <form>
+              <div className="form-row">
+                <div className="col-xs-12 col-sm-6 col-md text-center">
+                  <InputField
+                    title="Rows"
+                    name="rowCount"
+                    value={this.state.rowCount}
+                    min="1"
+                    max="1000"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="col-xs-12 col-sm-6 col-md text-center">
+                  <InputField
+                    title="Columns"
+                    name="colCount"
+                    value={this.state.colCount}
+                    min="1"
+                    max="50"
+                    onChange={this.handleChange}
+                  />
+                </div>
               </div>
-              <div className="col-xs-12 col-sm-6 col-md text-center">
-                <InputField
-                  title="Columns"
-                  name="colCount"
-                  value={this.state.colCount}
-                  min="1"
-                  max="50"
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-          </form>
-        </div>
+            </form>
+          </div>
 
-        <div
-          style={{ margin: "0px auto" }}
-          className="container text-center"
-          id="button-bank"
-        >
-          <ControlBtn
-            css={randBtnStyle}
-            className="btn btn-lg"
-            text="Randomize"
-            onClick={this.randOnClick}
-          />
-          <ControlBtn
-            css={hideBtnStyle}
-            className="btn btn-lg"
-            text="Hide Products"
-            onClick={this.hideOnClick}
-          />
-          <ControlBtn
-            css={clearBtnStyle}
-            className="btn btn-lg"
-            text="Clear Colors"
-            onClick={this.clearOnClick}
-          />
-          <ControlBtn
-            css={resetBtnStyle}
-            className="btn btn-lg"
-            text="Reset Grid"
-            onClick={this.resetOnClick}
-          />
-        </div>
+          <div
+            style={{ margin: "0px auto" }}
+            className="container text-center"
+            id="button-bank"
+          >
+            <ControlBtn
+              css={randBtnStyle}
+              className="btn btn-lg"
+              text="Randomize"
+              onClick={this.randOnClick}
+            />
+            <ControlBtn
+              css={hideBtnStyle}
+              className="btn btn-lg"
+              text="Hide Products"
+              onClick={this.hideOnClick}
+            />
+            <ControlBtn
+              css={clearBtnStyle}
+              className="btn btn-lg"
+              text="Clear Colors"
+              onClick={this.clearOnClick}
+            />
+            <ControlBtn
+              css={resetBtnStyle}
+              className="btn btn-lg"
+              text="Reset Grid"
+              onClick={this.resetOnClick}
+            />
+          </div>
 
-        <div
-          css={css`
-            overflow-x: auto;
-            margin: 10px auto;
-          `}
-        >
-          <MultTable
-            colFactors={this.state.colFactors}
-            rowFactors={this.state.rowFactors}
-            shadedCells={this.state.shadedCells}
-            cellOnClick={this.cellOnClick}
-            headerOnClick={this.headerCellOnClick}
-            hideCellValues={this.state.hideCellValues}
-          />
-        </div>
-      </Layout>
+          <div
+            css={css`
+              overflow-x: auto;
+              margin: 10px auto;
+            `}
+          >
+            <MultTable
+              colFactors={this.state.colFactors}
+              rowFactors={this.state.rowFactors}
+              shadedCells={this.state.shadedCells}
+              cellOnClick={this.cellOnClick}
+              headerOnClick={this.headerCellOnClick}
+              hideCellValues={this.state.hideCellValues}
+            />
+          </div>
+        </Layout>
+      </>
     )
   }
 }

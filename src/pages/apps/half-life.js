@@ -5,6 +5,7 @@ import AppIntro from "../../components/intro"
 import ControlBtn from "../../components/control-btn"
 import { prettyNum } from "../../components/numFormatter"
 import DataDisplay from "../../components/dataDisplay"
+import { Helmet } from "react-helmet"
 
 const ctrlBtnStyle = css`
   margin: 3px 2px;
@@ -341,83 +342,88 @@ class HalfLifeApp extends React.Component {
 
   render() {
     return (
-      <Layout>
-        <AppIntro introHTML={intro} />
-        <div id="preface" className="container">
-          <form>
-            <div className="form-group" style={{ margin: "20px auto" }}>
-              <label>
-                You can adjust the <b>half-life</b> of the atoms in this
-                simulation using this slider:
-              </label>
-              <input
-                id="user-input-hl"
-                type="range"
-                className="form-control-range"
-                min="1000"
-                max="120000"
-                step="1000"
-                value={this.state.halfLifeInMs}
-                onChange={this.handleChangeToHalfLifeSlider}
-                css={rangeFormStyle}
+      <>
+        <Helmet>
+          <title>Half-life - Mathematical Playgrounds</title>
+        </Helmet>
+        <Layout>
+          <AppIntro introHTML={intro} />
+          <div id="preface" className="container">
+            <form>
+              <div className="form-group" style={{ margin: "20px auto" }}>
+                <label>
+                  You can adjust the <b>half-life</b> of the atoms in this
+                  simulation using this slider:
+                </label>
+                <input
+                  id="user-input-hl"
+                  type="range"
+                  className="form-control-range"
+                  min="1000"
+                  max="120000"
+                  step="1000"
+                  value={this.state.halfLifeInMs}
+                  onChange={this.handleChangeToHalfLifeSlider}
+                  css={rangeFormStyle}
+                />
+              </div>
+            </form>
+          </div>
+
+          <div
+            style={{ margin: "0px auto 10px auto" }}
+            className="container text-center"
+            id="button-bank"
+          >
+            <div className="btn-group">
+              <ControlBtn
+                css={ctrlBtnStyle}
+                className="btn btn-lg"
+                text="Start"
+                onClick={this.startOnClick}
+              />
+              <ControlBtn
+                css={ctrlBtnStyle}
+                className="btn btn-lg"
+                text="Stop"
+                onClick={this.stopOnClick}
               />
             </div>
-          </form>
-        </div>
-
-        <div
-          style={{ margin: "0px auto 10px auto" }}
-          className="container text-center"
-          id="button-bank"
-        >
-          <div className="btn-group">
             <ControlBtn
-              css={ctrlBtnStyle}
+              css={resetBtnStyle}
               className="btn btn-lg"
-              text="Start"
-              onClick={this.startOnClick}
-            />
-            <ControlBtn
-              css={ctrlBtnStyle}
-              className="btn btn-lg"
-              text="Stop"
-              onClick={this.stopOnClick}
+              text="Reset"
+              onClick={this.resetOnClick}
             />
           </div>
-          <ControlBtn
-            css={resetBtnStyle}
-            className="btn btn-lg"
-            text="Reset"
-            onClick={this.resetOnClick}
-          />
-        </div>
 
-        <div
-          id="data-bank"
-          className="container"
-          style={{ margin: "20px auto" }}
-        >
-          <div className="row">
-            <DataDisplay
-              data={this.state.halfLifeInMs / 1000 + " sec."}
-              title={"Half-life"}
-            />
-            <DataDisplay
-              data={Math.floor(this.state.halfLifeCount)}
-              title={"Half-lives Elapsed"}
-            />
-            <DataDisplay
-              data={this.state.timeElapsed / 1000 + " sec."}
-              title={"Time Elapsed"}
-            />
-            <DataDisplay
-              data={prettyNum(this.state.atomCount)}
-              title={"Atoms Left"}
-            />
+          <div
+            id="data-bank"
+            className="container"
+            style={{ margin: "20px auto" }}
+          >
+            <div className="row">
+              <DataDisplay
+                data={this.state.halfLifeInMs / 1000 + " sec."}
+                title={"Half-life"}
+              />
+              <DataDisplay
+                data={Math.floor(this.state.halfLifeCount)}
+                title={"Half-lives Elapsed"}
+              />
+              <DataDisplay
+                data={this.state.timeElapsed / 1000 + " sec."}
+                title={"Time Elapsed"}
+              />
+              <DataDisplay
+                data={prettyNum(this.state.atomCount)}
+                title={"Atoms Left"}
+              />
+            </div>
           </div>
-        </div>
-        <AtomBuilder atomArr={this.state.atomArr} />
-      </Layout>
+          <AtomBuilder atomArr={this.state.atomArr} />
+        </Layout>
+      </>
     )
   }
 }

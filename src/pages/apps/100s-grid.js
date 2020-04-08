@@ -1,11 +1,11 @@
 import React from "react"
-// import styled from "@emotion/styled"
 import { css } from "@emotion/core"
 import Layout from "../../components/layout"
 import ControlBtn from "../../components/control-btn"
 import Cell from "../../components/cell"
 import InputField from "../../components/inputField"
 import { prettyNum } from "../../components/numFormatter"
+import { Helmet } from "react-helmet"
 
 // MUST DO FIRST!
 // TODO: !!!!Add limits to the inputs so that the user doesn't crash the grid with number that are too large
@@ -260,77 +260,82 @@ class GridApp extends React.Component {
 
   render() {
     return (
-      <Layout>
-        <div style={{ margin: "10px auto" }} id="settings-bank">
-          <form>
-            <div className="form-row">
-              <div className="col-xs-12 col-sm-6 col-md text-center">
-                <InputField
-                  title="Start"
-                  name="startNum"
-                  value={this.state.startNum}
-                  onChange={this.handleChange}
-                  min="-100"
-                  max="10000"
-                />
+      <>
+        <Helmet>
+          <title>100s Grid - Mathematical Playgrounds</title>
+        </Helmet>
+        <Layout>
+          <div style={{ margin: "10px auto" }} id="settings-bank">
+            <form>
+              <div className="form-row">
+                <div className="col-xs-12 col-sm-6 col-md text-center">
+                  <InputField
+                    title="Start"
+                    name="startNum"
+                    value={this.state.startNum}
+                    onChange={this.handleChange}
+                    min="-100"
+                    max="10000"
+                  />
+                </div>
+                <div className="col-xs-12 col-sm-6 col-md text-center">
+                  <InputField
+                    title="End"
+                    name="endNum"
+                    value={this.state.endNum}
+                    onChange={this.handleChange}
+                    min="1"
+                    max="10000"
+                  />
+                </div>
+                <div className="col-xs-12 col-sm-6 col-md text-center">
+                  <InputField
+                    title="Skip Size"
+                    name="skipSize"
+                    value={this.state.skipSize}
+                    onChange={this.handleChange}
+                    min="1"
+                    max="1250"
+                  />
+                </div>
+                <div className="col-xs-12 col-sm-6 col-md text-center">
+                  <InputField
+                    title="Columns"
+                    name="columns"
+                    value={this.state.columns}
+                    onChange={this.handleChange}
+                    min="1"
+                    max="150"
+                  />
+                </div>
               </div>
-              <div className="col-xs-12 col-sm-6 col-md text-center">
-                <InputField
-                  title="End"
-                  name="endNum"
-                  value={this.state.endNum}
-                  onChange={this.handleChange}
-                  min="1"
-                  max="10000"
-                />
-              </div>
-              <div className="col-xs-12 col-sm-6 col-md text-center">
-                <InputField
-                  title="Skip Size"
-                  name="skipSize"
-                  value={this.state.skipSize}
-                  onChange={this.handleChange}
-                  min="1"
-                  max="1250"
-                />
-              </div>
-              <div className="col-xs-12 col-sm-6 col-md text-center">
-                <InputField
-                  title="Columns"
-                  name="columns"
-                  value={this.state.columns}
-                  onChange={this.handleChange}
-                  min="1"
-                  max="150"
-                />
-              </div>
-            </div>
-          </form>
-        </div>
-        <ControlBtns
-          startNum={this.state.startNum}
-          endNum={this.state.endNum}
-          skipSize={this.state.skipSize}
-          columns={this.state.columns}
-          shadedCells={this.state.shadedCells}
-          numOnClick={this.numOnClick}
-          clearOnClick={this.clearOnClick}
-          resetOnClick={this.resetOnClick}
-        />
-        <div
-          id="grid-container"
-          style={{ overflowX: "auto", margin: "10px auto" }}
-        >
-          <Grid
+            </form>
+          </div>
+          <ControlBtns
             startNum={this.state.startNum}
             endNum={this.state.endNum}
             skipSize={this.state.skipSize}
             columns={this.state.columns}
             shadedCells={this.state.shadedCells}
-            onClick={this.cellOnClick}
+            numOnClick={this.numOnClick}
+            clearOnClick={this.clearOnClick}
+            resetOnClick={this.resetOnClick}
           />
-        </div>
-      </Layout>
+          <div
+            id="grid-container"
+            style={{ overflowX: "auto", margin: "10px auto" }}
+          >
+            <Grid
+              startNum={this.state.startNum}
+              endNum={this.state.endNum}
+              skipSize={this.state.skipSize}
+              columns={this.state.columns}
+              shadedCells={this.state.shadedCells}
+              onClick={this.cellOnClick}
+            />
+          </div>
+        </Layout>
+      </>
     )
   }
 }

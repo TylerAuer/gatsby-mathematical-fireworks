@@ -9,6 +9,7 @@ import ControlBtn from "../../components/control-btn"
 import CountsBarChart from "../../components/countsBarChart"
 import AvgLineChart from "../../components/avgLineChart"
 import { prettyNum } from "../../components/numFormatter"
+import { Helmet } from "react-helmet"
 
 const ctrlBtnStyle = css`
   margin: 3px 2px;
@@ -238,76 +239,81 @@ class DiceApp extends React.Component {
     }
 
     return (
-      <Layout>
-        <AppIntro introHTML={intro} />
+      <>
+        <Helmet>
+          <title>Dice - Mathematical Playgrounds</title>
+        </Helmet>
+        <Layout>
+          <AppIntro introHTML={intro} />
 
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col-xs-6 col-md-3">
-              <DataDisplay
-                title="Iterations"
-                data={prettyNum(this.state.iterations)}
-              />
-            </div>
+          <div className="container">
+            <div className="row align-items-center">
+              <div className="col-xs-6 col-md-3">
+                <DataDisplay
+                  title="Iterations"
+                  data={prettyNum(this.state.iterations)}
+                />
+              </div>
 
-            <div className="col-xs-6 col-md-3 order-md-3">
-              <DataDisplay title="Average Sum" data={avgDisplay} />
-            </div>
+              <div className="col-xs-6 col-md-3 order-md-3">
+                <DataDisplay title="Average Sum" data={avgDisplay} />
+              </div>
 
-            <div className="col-xs-12 col-md-6 order-md-2">
-              <InputField
-                title="Number of Dice"
-                name="diceNum"
-                value={this.state.diceCount}
-                onChange={this.diceCountOnChange}
-              />
+              <div className="col-xs-12 col-md-6 order-md-2">
+                <InputField
+                  title="Number of Dice"
+                  name="diceNum"
+                  value={this.state.diceCount}
+                  onChange={this.diceCountOnChange}
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div
-          id="dice-bin"
-          className="container d-flex flex-wrap justify-content-center"
-        >
-          {diceList}
-        </div>
+          <div
+            id="dice-bin"
+            className="container d-flex flex-wrap justify-content-center"
+          >
+            {diceList}
+          </div>
 
-        <div
-          id="control-btns"
-          className="container text-center"
-          style={{ margin: "10px auto" }}
-        >
-          <div className="btn-group">
+          <div
+            id="control-btns"
+            className="container text-center"
+            style={{ margin: "10px auto" }}
+          >
+            <div className="btn-group">
+              <ControlBtn
+                css={ctrlBtnStyle}
+                className="btn btn-lg"
+                text="Start"
+                onClick={this.startOnClick}
+              />
+              <ControlBtn
+                css={ctrlBtnStyle}
+                className="btn btn-lg"
+                text="Stop"
+                onClick={this.stop}
+              />
+            </div>
             <ControlBtn
-              css={ctrlBtnStyle}
+              css={resetBtnStyle}
               className="btn btn-lg"
-              text="Start"
-              onClick={this.startOnClick}
-            />
-            <ControlBtn
-              css={ctrlBtnStyle}
-              className="btn btn-lg"
-              text="Stop"
-              onClick={this.stop}
+              text="Reset"
+              onClick={this.resetOnClick}
             />
           </div>
-          <ControlBtn
-            css={resetBtnStyle}
-            className="btn btn-lg"
-            text="Reset"
-            onClick={this.resetOnClick}
+
+          <CountsBarChart
+            data={this.state.resultCounts}
+            hasData={this.state.iterations}
           />
-        </div>
-
-        <CountsBarChart
-          data={this.state.resultCounts}
-          hasData={this.state.iterations}
-        />
-        <AvgLineChart
-          data={this.state.avgSumHist}
-          hasData={this.state.iterations}
-        />
-      </Layout>
+          <AvgLineChart
+            data={this.state.avgSumHist}
+            hasData={this.state.iterations}
+          />
+        </Layout>
+      </>
     )
   }
 }
