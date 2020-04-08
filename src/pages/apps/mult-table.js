@@ -8,7 +8,7 @@ import { prettyNum } from "../../components/numFormatter"
 
 const clearBtnStyle = css`
   margin: 3px 2px;
-  font-family: "Bungee", cursive;
+  font-family: "Fredoka One", sans-serif;
   background-color: rgb(255, 116, 81);
   color: white;
   &:hover,
@@ -21,7 +21,7 @@ const clearBtnStyle = css`
 
 const hideBtnStyle = css`
   margin: 3px 2px;
-  font-family: "Bungee", cursive;
+  font-family: "Fredoka One", sans-serif;
   background-color: rgb(92, 221, 41);
   color: white;
   &:hover,
@@ -33,7 +33,7 @@ const hideBtnStyle = css`
 
 const resetBtnStyle = css`
   margin: 3px 2px;
-  font-family: "Bungee", cursive;
+  font-family: "Fredoka One", sans-serif;
   background-color: rgba(20, 186, 204, 1);
   color: white;
   &:hover,
@@ -45,7 +45,7 @@ const resetBtnStyle = css`
 
 const randBtnStyle = css`
   margin: 3px 2px;
-  font-family: "Bungee", cursive;
+  font-family: "Fredoka One", sans-serif;
   background-color: rgb(92, 221, 41);
   color: white;
   &:hover,

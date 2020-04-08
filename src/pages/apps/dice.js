@@ -1,17 +1,18 @@
 import React from "react"
+import { css } from "@emotion/core"
 import Layout from "../../components/layout"
 import AppIntro from "../../components/intro"
 import InputField from "../../components/inputField"
-import Die from "../../components/die"
 import DataDisplay from "../../components/dataDisplay"
+import Die from "../../components/die"
 import ControlBtn from "../../components/control-btn"
-import { css } from "@emotion/core"
 import CountsBarChart from "../../components/countsBarChart"
 import AvgLineChart from "../../components/avgLineChart"
+import { prettyNum } from "../../components/numFormatter"
 
 const ctrlBtnStyle = css`
   margin: 3px 2px;
-  font-family: "Bungee", cursive;
+  font-family: "Fredoka One", sans-serif;
   background-color: rgba(20, 186, 204, 1);
   color: white;
   &:hover,
@@ -23,7 +24,7 @@ const ctrlBtnStyle = css`
 
 const resetBtnStyle = css`
   margin: 3px 2px;
-  font-family: "Bungee", cursive;
+  font-family: "Fredoka One", sans-serif;
   background-color: rgb(255, 116, 81);
   color: white;
   &:hover,
@@ -243,7 +244,10 @@ class DiceApp extends React.Component {
         <div className="container">
           <div className="row align-items-center">
             <div className="col-xs-6 col-md-3">
-              <DataDisplay title="Iterations" data={this.state.iterations} />
+              <DataDisplay
+                title="Iterations"
+                data={prettyNum(this.state.iterations)}
+              />
             </div>
 
             <div className="col-xs-6 col-md-3 order-md-3">

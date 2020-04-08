@@ -15,7 +15,7 @@ function InputField(props) {
         <div
           css={css`
             color: rgba(20, 186, 204, 1);
-            font-family: "Bungee", cursive;
+            font-family: "Fredoka One", sans-serif;
             font-size: 25px;
             line-height: 1;
           `}
@@ -36,7 +36,7 @@ function InputField(props) {
         css={css`
           border: 2px solid rgb(255, 0, 141);
           border-radius: 40px;
-          font-family: "Bungee", cursive;
+          font-family: "Fredoka One", sans-serif;
           font-size: 30px;
           padding-left: 30px;
           margin: 0px auto 15px auto;

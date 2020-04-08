@@ -31,8 +31,9 @@ export const chartTheme = {
   },
   labels: {
     text: {
-      fontSize: 14,
-      fontFamily: "Bungee",
+      fontSize: 12,
+      fontFamily: "open sans",
+      fontWeight: "bold",
     },
   },
   markers: {

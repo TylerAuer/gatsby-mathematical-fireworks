@@ -23,7 +23,7 @@ const placeHolderOverlayStyle = css`
   /* background: rgba(219, 219, 219, 0.9); */
   backdrop-filter: blur(8px) grayscale(10%);
   font-size: 50px;
-  font-family: "Bungee", cursive;
+  font-family: "Fredoka One", sans-serif;
   text-shadow: 2px 2px 3px white;
 `
 

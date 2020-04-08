@@ -21,10 +21,9 @@ module.exports = {
         fonts: [
           {
             family: `Open Sans`,
-            variants: [`400`, `700`],
           },
           {
-            family: `Bungee`,
+            family: `Fredoka+One`,
           },
         ],
       },
