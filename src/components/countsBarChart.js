@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 import { ResponsiveBar } from "@nivo/bar"
 import { chartTheme } from "./chartTheme"
 import { css } from "@emotion/core"

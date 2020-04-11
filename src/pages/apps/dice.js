@@ -96,6 +96,7 @@ class DiceApp extends React.Component {
     this.state = {
       iterations: 0,
       diceCount: 2,
+      diceCountForm: 2,
       lastRoll: ["?", "?"],
       avgSumHist: [
         {
@@ -121,20 +122,23 @@ class DiceApp extends React.Component {
 
   diceCountOnChange(e) {
     this.stop()
-    const maxDiceCount = 20
 
     let newDiceCount = parseInt(e.target.value)
-    if (newDiceCount < 1) {
-      newDiceCount = 1
-    } else if (newDiceCount > maxDiceCount) {
-      newDiceCount = maxDiceCount
+    let safeDiceCount
+    if (newDiceCount > 0 && newDiceCount <= 20) {
+      safeDiceCount = newDiceCount
+    } else {
+      safeDiceCount = 2
     }
+    console.log(newDiceCount, safeDiceCount)
+
     this.setState({
-      diceCount: newDiceCount,
-      lastRoll: new Array(newDiceCount).fill("?"),
+      diceCountForm: e.target.value,
+      diceCount: safeDiceCount,
+      lastRoll: new Array(safeDiceCount).fill("?"),
       lastAvg: 0,
       iterations: 0,
-      resultCounts: this.genEmptyDiceCountDictArr(newDiceCount),
+      resultCounts: this.genEmptyDiceCountDictArr(safeDiceCount),
       avgSumHist: [
         {
           id: "Rolling Average",
@@ -263,7 +267,7 @@ class DiceApp extends React.Component {
                 <InputField
                   title="Number of Dice"
                   name="diceNum"
-                  value={this.state.diceCount}
+                  value={this.state.diceCountForm}
                   onChange={this.diceCountOnChange}
                 />
               </div>

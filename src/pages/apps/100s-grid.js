@@ -101,18 +101,50 @@ function ControlBtns(props) {
  * Component for the whole grid
  */
 function Grid(props) {
+  // check for safe user inputs that don't break table
+  let safeStartNum, safeEndNum, safeSkipSize, safeColumns
+
+  // Only accepts column values between 1 and 100 inclusive
+  if (props.columns >= 1 && props.columns <= 100) {
+    safeColumns = props.columns
+  } else {
+    safeColumns = 10
+  }
+
+  // Ensures endNum > startNum
+  if (props.endNum > props.startNum) {
+    safeStartNum = props.startNum
+    safeEndNum = props.endNum
+  } else {
+    safeStartNum = 1
+    safeEndNum = 100
+  }
+
+  // Caps startNum and endNum at 10000 for performance
+  if (Math.abs(safeStartNum) > 10000) {
+    safeStartNum = 1
+  }
+  if (Math.abs(safeEndNum) > 10000) {
+    safeEndNum = 100
+  }
+
+  if (props.skipSize < 10000 && props.skipSize >= 1) {
+    safeSkipSize = props.skipSize
+  } else {
+    safeSkipSize = 1
+  }
+
   const rowsNeeded = Math.ceil(
-    Math.ceil((1 + (props.endNum - props.startNum)) / props.skipSize) /
-      props.columns
+    Math.ceil((1 + (safeEndNum - safeStartNum)) / safeSkipSize) / safeColumns
   )
   let grid = []
-  let counter = props.startNum
+  let counter = safeStartNum
   // loop for row
   for (let i = 0; i < rowsNeeded; i++) {
     let row = []
     // loop for numbers in each row
-    for (let j = 0; j < props.columns; j++) {
-      if (counter <= props.endNum) {
+    for (let j = 0; j < safeColumns; j++) {
+      if (counter <= safeEndNum) {
         row.push(
           <Cell
             id={"cell" + counter}
@@ -132,7 +164,7 @@ function Grid(props) {
           />
         )
       }
-      counter += props.skipSize
+      counter += safeSkipSize
     }
     grid.push(<tr key={i}>{row}</tr>)
   }
@@ -246,16 +278,7 @@ class GridApp extends React.Component {
 
   // handleChange function for the input fields
   handleChange(e) {
-    // Avoids crash when user deletes current value in input
-    if (e.target.value === "") {
-      this.setState({ [e.target.name]: 1 })
-
-      // Avoids crash when skipCount is set to 0 or below
-    } else if (e.target.name === "skipSize" && parseInt(e.target.value) <= 0) {
-      this.setState({ [e.target.name]: 1 })
-    } else {
-      this.setState({ [e.target.name]: parseInt(e.target.value) })
-    }
+    this.setState({ [e.target.name]: parseInt(e.target.value) })
   }
 
   render() {
