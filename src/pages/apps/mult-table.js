@@ -229,7 +229,6 @@ class MultTableApp extends React.Component {
     // >1 for both row and col
     // <= 1000 for row
     // <= 30 for col
-
     let safeRowColCount
     if (e.target.value > 0) {
       if (e.target.name === "colCount" && e.target.value <= 30) {
