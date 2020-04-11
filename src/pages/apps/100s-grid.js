@@ -100,10 +100,6 @@ function ControlBtns(props) {
 /**
  * Component for the whole grid
  */
-// startNum={this.state.startNum}
-// endNum={this.state.endNum}
-// skipSize={this.state.skipSize}
-// columns={this.state.columns}
 function Grid(props) {
   // check for safe user inputs that don't break table
   let safeStartNum, safeEndNum, safeSkipSize, safeColumns
