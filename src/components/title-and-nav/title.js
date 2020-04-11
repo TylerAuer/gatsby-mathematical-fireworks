@@ -24,7 +24,7 @@ const titleStyle = css`
 `
 
 const letterStyle = css`
-  transition-duration: 1000ms;
+  transition-duration: 1500ms;
 `
 
 const colorCycle = [
