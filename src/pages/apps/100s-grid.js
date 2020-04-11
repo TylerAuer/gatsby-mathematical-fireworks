@@ -246,16 +246,7 @@ class GridApp extends React.Component {
 
   // handleChange function for the input fields
   handleChange(e) {
-    // Avoids crash when user deletes current value in input
-    if (e.target.value === "") {
-      this.setState({ [e.target.name]: 1 })
-
-      // Avoids crash when skipCount is set to 0 or below
-    } else if (e.target.name === "skipSize" && parseInt(e.target.value) <= 0) {
-      this.setState({ [e.target.name]: 1 })
-    } else {
-      this.setState({ [e.target.name]: parseInt(e.target.value) })
-    }
+    this.setState({ [e.target.name]: parseInt(e.target.value) })
   }
 
   render() {
