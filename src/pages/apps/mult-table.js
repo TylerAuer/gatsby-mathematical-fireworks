@@ -220,14 +220,31 @@ class MultTableApp extends React.Component {
     }
   }
 
-  //TODO: Add checks to make sure the user inputs make sense and don't crash the app
   // handleChange function for the input fields
   handleChange(e) {
     // updates the value in the input field
     this.setState({ [e.target.name]: parseInt(e.target.value) })
+
+    // checks that user input is
+    // >1 for both row and col
+    // <= 1000 for row
+    // <= 30 for col
+    let safeRowColCount
+    if (e.target.value > 0) {
+      if (e.target.name === "colCount" && e.target.value <= 30) {
+        safeRowColCount = e.target.value
+      } else if (e.target.name === "rowCount" && e.target.value <= 1000) {
+        safeRowColCount = e.target.value
+      } else {
+        safeRowColCount = 10
+      }
+    } else {
+      safeRowColCount = 10
+    }
+
     // re-renders the table
     let newFactorArr = []
-    for (let i = 1; i <= e.target.value; i++) {
+    for (let i = 1; i <= safeRowColCount; i++) {
       newFactorArr.push(i)
     }
     if (e.target.name === "rowCount") {
