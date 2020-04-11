@@ -85,7 +85,7 @@ class Title extends React.Component {
         this.updateColors()
         this.wrapLetters()
       }, 200) // how often to randomly change colors
-    }, 1000) // how long to wait before starting to change colors
+    }, 500) // how long to wait before starting to change colors
   }
 
   componentWillUnmount() {
