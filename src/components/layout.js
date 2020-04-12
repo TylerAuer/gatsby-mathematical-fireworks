@@ -7,8 +7,8 @@ import React from "react"
 import HeadMeta from "./headMeta"
 import Header from "./title-and-nav/header"
 import "./global.css"
+import { Table } from "react-bootstrap"
 
-// TODO: Add bootstrap JQuery scripts at end of body (I think that's just at the bottom of this render)
 // TODO: Add fixed footer to the site
 export default ({ children }) => (
   <>
