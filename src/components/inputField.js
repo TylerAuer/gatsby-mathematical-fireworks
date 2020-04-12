@@ -1,6 +1,7 @@
 import React from "react"
 import { css } from "@emotion/core"
 import ToastWarning from "./toast"
+import { prettyNum } from "./numFormatter"
 
 function InputField(props) {
   return (
@@ -27,7 +28,7 @@ function InputField(props) {
               `}
             >
               <span style={{ fontWeight: "bold" }}>{props.title}</span> value
-              must be between {props.min} and {props.max}.
+              must be between {prettyNum(props.min)} and {prettyNum(props.max)}.
             </p>
           </>
         }
