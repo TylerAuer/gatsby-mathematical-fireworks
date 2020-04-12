@@ -38,8 +38,8 @@ function Toast(props) {
           left: 50%; /* Center the snackbar */
           top: 30px; /* 30px from the bottom */
           box-shadow: 8px 8px 15px black;
-          -webkit-animation: ${fadein} 0.5s, ${fadeout} 1s 3.5s forwards;
-          animation: ${fadein} 0.5s, ${fadeout} 1s 3.5s forwards;
+          -webkit-animation: ${fadein} 0.5s, ${fadeout} 1s 4.5s forwards;
+          animation: ${fadein} 0.5s, ${fadeout} 1s 4.5s forwards;
         `}
       >
         <div
