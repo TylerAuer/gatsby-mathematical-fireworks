@@ -3,8 +3,24 @@ import { css, keyframes } from "@emotion/core"
 
 function Toast(props) {
   const fadein = keyframes`
-    from {top: 0; opacity: 0;}
-    to {top: 30px; opacity: 1;}
+    from {
+      top: 0; 
+      opacity: 0;
+    }
+    to {
+      top: 30px; 
+      opacity: 1;
+    }
+    `
+  const fadeout = keyframes`
+    from {
+      top: 30px; 
+      opacity: 1;
+    }
+    to {
+      top: 0; 
+      opacity: 0; 
+    }
   `
 
   if (props.show) {
@@ -22,8 +38,8 @@ function Toast(props) {
           left: 50%; /* Center the snackbar */
           top: 30px; /* 30px from the bottom */
           box-shadow: 8px 8px 15px black;
-          -webkit-animation: ${fadein} 0.5s, fadeout 0.5s 2.5s;
-          animation: ${fadein} 0.5s, fadeout 0.5s 2.5s;
+          -webkit-animation: ${fadein} 0.5s, ${fadeout} 1s 3.5s forwards;
+          animation: ${fadein} 0.5s, ${fadeout} 1s 3.5s forwards;
         `}
       >
         <div
@@ -53,6 +69,7 @@ function Toast(props) {
   }
 }
 
+<<<<<<< HEAD
 export default Toast
 
 {
@@ -84,3 +101,6 @@ export default Toast
   }
 /> */
 }
+=======
+export default ToastWarning
+>>>>>>> 3f579be... create basic Toast component and add to InputField
