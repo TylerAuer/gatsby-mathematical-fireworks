@@ -69,6 +69,7 @@ function Toast(props) {
   }
 }
 
+<<<<<<< HEAD
 export default Toast
 
 {
@@ -100,3 +101,6 @@ export default Toast
   }
 /> */
 }
+=======
+export default ToastWarning
+>>>>>>> 3f579be... create basic Toast component and add to InputField
