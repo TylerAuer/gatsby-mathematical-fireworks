@@ -16,7 +16,7 @@ function ToastWarning(props) {
           z-index: 1; /* Add a z-index if needed */
           left: 50%; /* Center the snackbar */
           top: 30px; /* 30px from the bottom */
-          box-shadow: 2px 2px 3px grey;
+          box-shadow: 8px 8px 15px black;
         `}
       >
         {props.body}
