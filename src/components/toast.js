@@ -6,24 +6,20 @@ function Toast(props) {
     from {
       top: 0; 
       opacity: 0;
-      visibility: hidden;
     }
     to {
       top: 30px; 
       opacity: 1;
-      visibility: visible;
     }
     `
   const fadeout = keyframes`
     from {
       top: 30px; 
       opacity: 1;
-      visibility: visible;
     }
     to {
       top: 0; 
       opacity: 0; 
-      visibility: hidden;
     }
   `
 
@@ -42,8 +38,8 @@ function Toast(props) {
           left: 50%; /* Center the snackbar */
           top: 30px; /* 30px from the bottom */
           box-shadow: 8px 8px 15px black;
-          -webkit-animation: ${fadein} 0.5s, ${fadeout} 1s 3.5s;
-          animation: ${fadein} 0.5s, ${fadeout} 1s 3.5s;
+          -webkit-animation: ${fadein} 0.5s, ${fadeout} 1s 3.5s forwards;
+          animation: ${fadein} 0.5s, ${fadeout} 1s 3.5s forwards;
         `}
       >
         <div
