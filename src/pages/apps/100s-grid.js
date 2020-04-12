@@ -6,11 +6,7 @@ import Cell from "../../components/cell"
 import InputField from "../../components/inputField"
 import { prettyNum } from "../../components/numFormatter"
 import { Helmet } from "react-helmet"
-<<<<<<< HEAD
 import Toast from "../../components/toast"
-=======
-import ToastWarning from "../../components/toast"
->>>>>>> 3f579be... create basic Toast component and add to InputField
 
 // Can do later
 // TODO: Add skip count by... user input option
@@ -323,12 +319,9 @@ class GridApp extends React.Component {
                     value={this.state.startNum}
                     onChange={this.handleChange}
                     min="-10000"
-<<<<<<< HEAD
                     max="9999"
-=======
                     max="10000"
                     showWarning={true}
->>>>>>> 3f579be... create basic Toast component and add to InputField
                   />
                 </div>
                 <div className="col-xs-12 col-sm-6 col-md text-center">

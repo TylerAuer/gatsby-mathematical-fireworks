@@ -1,37 +1,9 @@
 import React from "react"
 import { css } from "@emotion/core"
-import ToastWarning from "./toast"
 
 function InputField(props) {
   return (
     <>
-      <ToastWarning
-        show={props.showWarning}
-        body={
-          <>
-            <div
-              css={css`
-                font-size: 30px;
-                font-family: "Fredoka One", sans-serif;
-                border-bottom: 2px solid white;
-                padding: 5px 10px;
-              `}
-            >
-              Invalid {props.title} Value
-            </div>
-            <p
-              css={css`
-                font-size: 20px;
-                text-align: left;
-                padding: 10px 20px;
-              `}
-            >
-              <span style={{ fontWeight: "bold" }}>{props.title}</span> value
-              must be between {props.min} and {props.max}.
-            </p>
-          </>
-        }
-      />
       <div className="text-center">
         <label htmlFor="start">
           <div

@@ -69,38 +69,4 @@ function Toast(props) {
   }
 }
 
-<<<<<<< HEAD
 export default Toast
-
-{
-  /* <Toast
-  show={props.showWarning}
-  body={
-    <>
-      <div
-        css={css`
-          font-size: 30px;
-          font-family: "Fredoka One", sans-serif;
-          border-bottom: 2px solid white;
-          padding: 5px 10px;
-        `}
-      >
-        Invalid {props.title} Value
-      </div>
-      <p
-        css={css`
-          font-size: 20px;
-          text-align: left;
-          padding: 10px 20px;
-        `}
-      >
-        <span style={{ fontWeight: "bold" }}>{props.title}</span> value
-        must be between {prettyNum(props.min)} and {prettyNum(props.max)}.
-      </p>
-    </>
-  }
-/> */
-}
-=======
-export default ToastWarning
->>>>>>> 3f579be... create basic Toast component and add to InputField
