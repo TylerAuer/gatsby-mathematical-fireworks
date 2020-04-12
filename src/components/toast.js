@@ -1,7 +1,7 @@
-import React, { useState } from "react"
+import React from "react"
 import { css } from "@emotion/core"
 
-function ToastWarning(props) {
+function Toast(props) {
   if (props.show) {
     return (
       <div
@@ -19,7 +19,26 @@ function ToastWarning(props) {
           box-shadow: 8px 8px 15px black;
         `}
       >
-        {props.body}
+        <div
+          css={css`
+            font-size: 30px;
+            font-family: "Fredoka One", sans-serif;
+            border-bottom: 2px solid white;
+            padding: 5px 10px;
+            text-align: center;
+          `}
+        >
+          {props.title}
+        </div>
+        <div
+          css={css`
+            font-size: 18px;
+            text-align: left;
+            padding: 10px 20px;
+          `}
+        >
+          {props.body}
+        </div>
       </div>
     )
   } else {
@@ -27,4 +46,34 @@ function ToastWarning(props) {
   }
 }
 
-export default ToastWarning
+export default Toast
+
+{
+  /* <Toast
+  show={props.showWarning}
+  body={
+    <>
+      <div
+        css={css`
+          font-size: 30px;
+          font-family: "Fredoka One", sans-serif;
+          border-bottom: 2px solid white;
+          padding: 5px 10px;
+        `}
+      >
+        Invalid {props.title} Value
+      </div>
+      <p
+        css={css`
+          font-size: 20px;
+          text-align: left;
+          padding: 10px 20px;
+        `}
+      >
+        <span style={{ fontWeight: "bold" }}>{props.title}</span> value
+        must be between {prettyNum(props.min)} and {prettyNum(props.max)}.
+      </p>
+    </>
+  }
+/> */
+}
