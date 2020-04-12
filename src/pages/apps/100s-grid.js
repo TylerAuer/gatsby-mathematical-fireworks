@@ -6,9 +6,8 @@ import Cell from "../../components/cell"
 import InputField from "../../components/inputField"
 import { prettyNum } from "../../components/numFormatter"
 import { Helmet } from "react-helmet"
+import ToastWarning from "../../components/toast"
 
-// MUST DO FIRST!
-// TODO: !!!!Add limits to the inputs so that the user doesn't crash the grid with number that are too large
 // Can do later
 // TODO: Add skip count by... user input option
 // TODO: Work my way back through the code to see if I can optimize it before moving on
@@ -297,8 +296,9 @@ class GridApp extends React.Component {
                     name="startNum"
                     value={this.state.startNum}
                     onChange={this.handleChange}
-                    min="-100"
+                    min="-10000"
                     max="10000"
+                    showWarning={true}
                   />
                 </div>
                 <div className="col-xs-12 col-sm-6 col-md text-center">
