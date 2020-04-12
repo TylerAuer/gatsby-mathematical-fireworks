@@ -1,7 +1,12 @@
 import React from "react"
-import { css } from "@emotion/core"
+import { css, keyframes } from "@emotion/core"
 
 function Toast(props) {
+  const fadein = keyframes`
+    from {top: 0; opacity: 0;}
+    to {top: 30px; opacity: 1;}
+  `
+
   if (props.show) {
     return (
       <div
@@ -17,6 +22,8 @@ function Toast(props) {
           left: 50%; /* Center the snackbar */
           top: 30px; /* 30px from the bottom */
           box-shadow: 8px 8px 15px black;
+          -webkit-animation: ${fadein} 0.5s, fadeout 0.5s 2.5s;
+          animation: ${fadein} 0.5s, fadeout 0.5s 2.5s;
         `}
       >
         <div
