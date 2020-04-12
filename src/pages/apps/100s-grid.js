@@ -6,9 +6,8 @@ import Cell from "../../components/cell"
 import InputField from "../../components/inputField"
 import { prettyNum } from "../../components/numFormatter"
 import { Helmet } from "react-helmet"
+import Toast from "../../components/toast"
 
-// MUST DO FIRST!
-// TODO: !!!!Add limits to the inputs so that the user doesn't crash the grid with number that are too large
 // Can do later
 // TODO: Add skip count by... user input option
 // TODO: Work my way back through the code to see if I can optimize it before moving on
@@ -101,6 +100,8 @@ function ControlBtns(props) {
  * Component for the whole grid
  */
 function Grid(props) {
+  let toastTitle, toastBody
+  let showToast = false
   // check for safe user inputs that don't break table
   let safeStartNum, safeEndNum, safeSkipSize, safeColumns
 
@@ -109,6 +110,9 @@ function Grid(props) {
     safeColumns = props.columns
   } else {
     safeColumns = 10
+    showToast = true
+    toastTitle = "Invalid Number of Columns"
+    toastBody = "The number of columns must be between 1 and 100."
   }
 
   // Ensures endNum > startNum
@@ -118,20 +122,34 @@ function Grid(props) {
   } else {
     safeStartNum = 1
     safeEndNum = 100
+    showToast = true
+    toastTitle = "Start > End"
+    toastBody = "The start number must be greater than the end number."
   }
 
   // Caps startNum and endNum at 10000 for performance
   if (Math.abs(safeStartNum) > 10000) {
     safeStartNum = 1
+    showToast = true
+    toastTitle = "Start Number Too Extreme"
+    toastBody =
+      "The start number cannot be greater than 10,000 or less than -10,000."
   }
   if (Math.abs(safeEndNum) > 10000) {
     safeEndNum = 100
+    showToast = true
+    toastTitle = "End Number Too Extreme"
+    toastBody =
+      "The end number cannot be greater than 10,000 or less than -10,000."
   }
 
   if (props.skipSize < 10000 && props.skipSize >= 1) {
     safeSkipSize = props.skipSize
   } else {
     safeSkipSize = 1
+    showToast = true
+    toastTitle = "Invalid Skip Size"
+    toastBody = "The skip size must be between 1 and 10,000."
   }
 
   const rowsNeeded = Math.ceil(
@@ -175,9 +193,12 @@ function Grid(props) {
   }
 
   return (
-    <table style={tableStyles}>
-      <tbody>{grid}</tbody>
-    </table>
+    <>
+      <Toast show={showToast} title={toastTitle} body={toastBody} />
+      <table style={tableStyles}>
+        <tbody>{grid}</tbody>
+      </table>
+    </>
   )
 }
 
@@ -297,8 +318,8 @@ class GridApp extends React.Component {
                     name="startNum"
                     value={this.state.startNum}
                     onChange={this.handleChange}
-                    min="-100"
-                    max="10000"
+                    min="-10000"
+                    max="9999"
                   />
                 </div>
                 <div className="col-xs-12 col-sm-6 col-md text-center">
@@ -307,7 +328,7 @@ class GridApp extends React.Component {
                     name="endNum"
                     value={this.state.endNum}
                     onChange={this.handleChange}
-                    min="1"
+                    min="-9999"
                     max="10000"
                   />
                 </div>

@@ -1,13 +1,6 @@
 import React from "react"
 import { css } from "@emotion/core"
 
-// TODO: Move rendering conditional here, so that if users enter bad info,
-// state of the app can update but not have it change the display until they enter
-// legit info
-// TODO: Add tooltips warning if a User's input is outside of the range
-/**
- * Style for the user input fields that control the grid
- */
 function InputField(props) {
   return (
     <div className="text-center">
