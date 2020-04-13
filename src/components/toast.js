@@ -2,7 +2,7 @@ import React from "react"
 import { css, keyframes } from "@emotion/core"
 
 function Toast(props) {
-  const fadein = keyframes`
+  const fadeintop = keyframes`
     from {
       top: 0; 
       opacity: 0;
@@ -12,7 +12,7 @@ function Toast(props) {
       opacity: 1;
     }
     `
-  const fadeout = keyframes`
+  const fadeouttop = keyframes`
     from {
       top: 30px; 
       opacity: 1;
@@ -22,24 +22,54 @@ function Toast(props) {
       opacity: 0; 
     }
   `
+  const fadeinbottom = keyframes`
+    from {
+      bottom: 0; 
+      opacity: 0;
+    }
+    to {
+      bottom: 30px; 
+      opacity: 1;
+    }
+    `
+  const fadeoutbottom = keyframes`
+    from {
+      bottom: 30px; 
+      opacity: 1;
+    }
+    to {
+      bottom: 0; 
+      opacity: 0; 
+    }
+  `
 
   if (props.show) {
     return (
       <div
         css={css`
-          width: 50%; /* Set a default minimum width */
-          margin-left: -25%; /* Divide value of min-width by 2 */
+          position: fixed;
           background-color: rgba(255, 0, 141, 0.98);
-          color: #fff; /* White text color */
-          border-radius: 10px; /* Rounded borders */
-          /* padding: 15px 30px; Padding */
-          position: fixed; /* Sit on top of the screen */
-          z-index: 1; /* Add a z-index if needed */
-          left: 50%; /* Center the snackbar */
-          top: 30px; /* 30px from the bottom */
+          color: #fff;
+          border-radius: 10px;
           box-shadow: 8px 8px 15px black;
-          -webkit-animation: ${fadein} 0.5s, ${fadeout} 1s 4.5s forwards;
-          animation: ${fadein} 0.5s, ${fadeout} 1s 4.5s forwards;
+          z-index: 1; /* Add a z-index if needed */
+          width: 90%; /* Set a default minimum width */
+          right: 5%; /* Center the snackbar */
+          bottom: 50px;
+          -webkit-animation: ${fadeinbottom} 0.5s forwards,
+            ${fadeoutbottom} 1s 4.5s forwards;
+          animation: ${fadeinbottom} 0.5s forwards forwards;
+          /* Moves toast to top for md and larger screens */
+          @media (min-width: 768px) {
+            width: 60%; /* Set a default minimum width */
+            right: 20%; /* Center the snackbar */
+            top: 30px;
+            bottom: auto;
+            -webkit-animation: ${fadeintop} 0.5s forwards,
+              ${fadeouttop} 1s 4.5s forwards;
+            animation: ${fadeintop} 0.5s forwards,
+              ${fadeouttop} 1s 4.5s forwards;
+          }
         `}
       >
         <div
