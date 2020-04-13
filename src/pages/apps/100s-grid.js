@@ -115,16 +115,22 @@ function Grid(props) {
     toastBody = "The number of columns must be between 1 and 100."
   }
 
-  // Ensures endNum > startNum
-  if (props.endNum > props.startNum) {
-    safeStartNum = props.startNum
-    safeEndNum = props.endNum
-  } else {
+  if (isNaN(props.startNum) || isNaN(props.endNum)) {
     safeStartNum = 1
     safeEndNum = 100
     showToast = true
-    toastTitle = "Start > End"
-    toastBody = "The start number must be greater than the end number."
+    toastTitle = "Start and End Numbers Required"
+    toastBody =
+      "The start and end numbers can be anything between -10,000 and 10,000 as long as the start number is less than the end number"
+  } else if (props.endNum < props.startNum) {
+    safeStartNum = 1
+    safeEndNum = 100
+    showToast = true
+    toastTitle = "Start Greater Than End"
+    toastBody = "The start number must be less than the end number."
+  } else {
+    safeStartNum = props.startNum
+    safeEndNum = props.endNum
   }
 
   // Caps startNum and endNum at 10000 for performance
@@ -133,14 +139,14 @@ function Grid(props) {
     showToast = true
     toastTitle = "Start Number Too Extreme"
     toastBody =
-      "The start number cannot be greater than 10,000 or less than -10,000."
+      "The start number cannot be greater than 9,999 or less than -10,000."
   }
   if (Math.abs(safeEndNum) > 10000) {
     safeEndNum = 100
     showToast = true
     toastTitle = "End Number Too Extreme"
     toastBody =
-      "The end number cannot be greater than 10,000 or less than -10,000."
+      "The end number cannot be greater than 10,000 or less than -9,999."
   }
 
   if (props.skipSize < 10000 && props.skipSize >= 1) {

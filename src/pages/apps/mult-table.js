@@ -6,6 +6,7 @@ import InputField from "../../components/inputField"
 import ControlBtn from "../../components/control-btn"
 import { prettyNum } from "../../components/numFormatter"
 import { Helmet } from "react-helmet"
+import Toast from "../../components/toast"
 
 const clearBtnStyle = css`
   margin: 3px 2px;
@@ -164,6 +165,7 @@ class MultTableApp extends React.Component {
       rowFactors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       shadedCells: [],
       hideCellValues: false,
+      showToast: false,
     }
   }
 
@@ -223,23 +225,28 @@ class MultTableApp extends React.Component {
   // handleChange function for the input fields
   handleChange(e) {
     // updates the value in the input field
-    this.setState({ [e.target.name]: parseInt(e.target.value) })
+    this.setState({
+      [e.target.name]: parseInt(e.target.value),
+      showToast: false,
+    })
 
     // checks that user input is
     // >1 for both row and col
-    // <= 1000 for row
+    // <= 400 for row
     // <= 30 for col
     let safeRowColCount
     if (e.target.value > 0) {
       if (e.target.name === "colCount" && e.target.value <= 30) {
         safeRowColCount = e.target.value
-      } else if (e.target.name === "rowCount" && e.target.value <= 1000) {
+      } else if (e.target.name === "rowCount" && e.target.value <= 400) {
         safeRowColCount = e.target.value
       } else {
         safeRowColCount = 10
+        this.setState({ showToast: true })
       }
     } else {
       safeRowColCount = 10
+      this.setState({ showToast: true })
     }
 
     // re-renders the table
@@ -273,6 +280,7 @@ class MultTableApp extends React.Component {
       rowCount: 10,
       colFactors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       rowFactors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      showToast: false,
     })
     clearTimeout(this.skipCounterID)
   }
@@ -325,6 +333,11 @@ class MultTableApp extends React.Component {
         <Helmet>
           <title>Multiplication Table - Mathematical Playgrounds</title>
         </Helmet>
+        <Toast
+          show={this.state.showToast}
+          title="Invalid Setting"
+          body="You must have between 1 and 400 rows and between 1 and 30 columns."
+        />
         <Layout>
           <div style={{ margin: "10px auto" }} id="settings-bank">
             <form>
@@ -345,7 +358,7 @@ class MultTableApp extends React.Component {
                     name="colCount"
                     value={this.state.colCount}
                     min="1"
-                    max="50"
+                    max="30"
                     onChange={this.handleChange}
                   />
                 </div>

@@ -10,6 +10,7 @@ import CountsBarChart from "../../components/countsBarChart"
 import AvgLineChart from "../../components/avgLineChart"
 import { prettyNum } from "../../components/numFormatter"
 import { Helmet } from "react-helmet"
+import Toast from "../../components/toast"
 
 const ctrlBtnStyle = css`
   margin: 3px 2px;
@@ -106,6 +107,7 @@ class DiceApp extends React.Component {
         },
       ],
       resultCounts: this.genEmptyDiceCountDictArr(2),
+      showToast: false,
     }
   }
 
@@ -122,15 +124,19 @@ class DiceApp extends React.Component {
 
   diceCountOnChange(e) {
     this.stop()
+    this.setState({
+      showToast: false,
+    })
 
     let newDiceCount = parseInt(e.target.value)
     let safeDiceCount
+    let showToast = false
     if (newDiceCount > 0 && newDiceCount <= 20) {
       safeDiceCount = newDiceCount
     } else {
       safeDiceCount = 2
+      showToast = true
     }
-    console.log(newDiceCount, safeDiceCount)
 
     this.setState({
       diceCountForm: e.target.value,
@@ -139,6 +145,7 @@ class DiceApp extends React.Component {
       lastAvg: 0,
       iterations: 0,
       resultCounts: this.genEmptyDiceCountDictArr(safeDiceCount),
+      showToast: showToast,
       avgSumHist: [
         {
           id: "Rolling Average",
@@ -247,6 +254,11 @@ class DiceApp extends React.Component {
         <Helmet>
           <title>Dice - Mathematical Playgrounds</title>
         </Helmet>
+        <Toast
+          show={this.state.showToast}
+          title="Invalid Number of Dice"
+          body="You must have between 1 and 20 dice."
+        />
         <Layout>
           <AppIntro introHTML={intro} />
 
@@ -267,6 +279,8 @@ class DiceApp extends React.Component {
                 <InputField
                   title="Number of Dice"
                   name="diceNum"
+                  min="1"
+                  max="20"
                   value={this.state.diceCountForm}
                   onChange={this.diceCountOnChange}
                 />
