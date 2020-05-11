@@ -54,4 +54,5 @@ I recently (2/20/20) finished combining a few projects and migrating the whole s
 - Visual Collatz Conjecture
 - XKCD Fruit Rating that stores users values and updates a la [NYTimes](https://www.nytimes.com/interactive/2017/08/09/upshot/game-of-thrones-chart.html)
 - Powerball or other lottery simulator (try to pick a winner)
+- Law of Large Numbers, probability (ex: https://teacher.desmos.com/activitybuilder/custom/59233c9aefd17610dbbd684e#preview/1bcde657-7bef-4606-a2f8-d84c5b9f824b)
 - Game of Life (Conway)
